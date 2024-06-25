@@ -6,6 +6,7 @@ CREATE TABLE User_accounts (
 	user_id INT NOT NULL,
     user_name VARCHAR(255) NOT NULL,
     password VARCHAR(128) NOT NULL,
+    salt VARCHAR(40) NOT NULL,
     email VARCHAR(255) NOT NULL,
     PRIMARY KEY (user_id)
 );
