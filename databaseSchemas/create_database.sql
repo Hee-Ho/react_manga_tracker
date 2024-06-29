@@ -43,3 +43,7 @@ CREATE TABLE Comments (
     PRIMARY KEY (comment_id),
     FOREIGN KEY (reply_to) REFERENCES Posts(post_id)
 );
+
+USE mangaTracker;
+INSERT into manga_status VALUES('random id', 'Berserk', 'seinen', 'Ongoing', now());
+SELECT * from manga_status

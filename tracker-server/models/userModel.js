@@ -1,12 +1,7 @@
-
+import dbConnection from "../database/database.js";
 
 //Model handle all database related action 
-const userModel = {
-  queryLogin: () => {
-    var respond = "Login verification";
-    return respond;
-  }
-};
+export const queryLogin = async() => {
+  return "User verification";
+}
 
-
-export default userModel;
