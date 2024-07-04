@@ -6,6 +6,7 @@
 .pnp.js
 /tracker-client/node_modules
 .env
+testAPI.js
 
 
 # testing

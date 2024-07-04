@@ -11,6 +11,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+//May need to check if database is up first
+
 app.use((err, req, res, next) => {
   console.err(err.stack)
   res.status(500).send("Server error")
