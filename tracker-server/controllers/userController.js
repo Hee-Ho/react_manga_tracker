@@ -1,9 +1,27 @@
-import { queryLogin } from "../models/userModel.js";
+import { queryLogin, queryCreateAccount } from "../models/userModel.js";
 
 export const userLogin = async(req, res) => {
-  const credential = await queryLogin();
-  res.status(200).json({
-    data: credential
-  })
+  try {
+    const {username, password} = req.body
+    const data = await queryLogin(username);
+    //data from db is in the first element of array
+    if (data[0].length < 1) {
+      res.status(404).send("Account not found");
+      return;
+    }
+      res.status(200).send("Success");
+  }
+  catch (e) {
+    res.status(500).send("Internal server error");
+  }
+}
+
+export const createAccount = async(req, res) => {
+  try {
+
+  }
+  catch (e) {
+    res.status(500).send("Internal server error");
+  }
 }
 
