@@ -44,5 +44,5 @@ CREATE TABLE Comments (
     FOREIGN KEY (post_id) REFERENCES Posts(post_id)
 );
 
-INSERT into manga_status VALUES('random id', 'Berserk', 'seinen', 'Ongoing', now());
+INSERT into manga_status VALUES('random id', 'Berserk', 'Kentarou Miura','seinen', 'Ongoing', now());
 SELECT * from manga_status
