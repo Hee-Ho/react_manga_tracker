@@ -7,6 +7,7 @@
 /tracker-client/node_modules
 .env
 testAPI.js
+test.sql
 
 
 # testing

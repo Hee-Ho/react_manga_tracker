@@ -1,0 +1,8 @@
+DELIMITER //
+
+CREATE PROCEDURE spGetAllManga() 
+BEGIN 
+	SELECT * FROM manga_status;
+END //
+
+DELIMITER ;
