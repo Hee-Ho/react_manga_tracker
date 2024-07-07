@@ -7,7 +7,8 @@ const dbConnection = await mysql.createPool ({
   user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
-  enableKeepAlive: true
+  enableKeepAlive: true, 
+  multipleStatements: true
 }).promise() //allow usage of async await
 
 export default dbConnection;
