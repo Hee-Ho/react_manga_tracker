@@ -1,27 +1,30 @@
 
 
-import { UInput, PInput } from "../components/uinputs"
-import { useState } from "react"
-
 export default function Signup() {
     
-    const [username, setUser] = useState('');
-    const [pw, setPw] = useState('');
-    const [confpw, setConfPw] = useState('');
 
-    function SubmitForm(){
+    const SubmitForm = (formData) => {
 
-        console.log(username)
+        formData.preventDefault()
+
+        console.log(formData.target.user.value,formData.target.pw.value,formData.target.confpw.value)
     };
 
 
     return (
-        <div>
-            <form action={SubmitForm}>
+        <div className="userAccountInput">
+            <form onSubmit={SubmitForm}>
                 <h1>Sign up page</h1>
-                <UInput updateUser={setUser}/>
-                <PInput text="Password: "/>
-                <PInput text="Confirm Password: "/>
+                <div>
+                    <label>Username: </label>
+                    <input name="user" type="text" minLength={1} maxLength={40} placeholder="Username" size={40} required/>
+                </div>
+                <div>
+                    <label>Password: </label>
+                    <input name="pw" type="password" minLength={1} placeholder="Password" size={40}  required/>
+                </div>
+                <label>Confirm Password: </label>
+                <input name="confpw" type="password" minLength={1} placeholder="Password" size={40} required/>
                 <button type="submit">Submit</button>
             </form>
         </div>

@@ -1,6 +1,6 @@
 
 
-import { UrlLink } from "../components/navLinks"
+import { Link } from "react-router-dom"
 
 
 
@@ -9,7 +9,7 @@ export default function Login() {
     return (
         <div>
             <h1>Login page</h1>
-            <UrlLink newURL={"/signup"} label="Signup" />
+            <Link to={"/signup"}>Signup</Link>
         </div>
     )
 
