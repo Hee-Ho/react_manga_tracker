@@ -18,15 +18,15 @@ import Signup from './pages/signup';
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: Home()
+    element: <Home />
   },
   {
     path: "login",
-    element: Login()
+    element: <Login />
   },
   {
     path: "signup",
-    element: Signup()
+    element: <Signup />
   }
 ]
 
