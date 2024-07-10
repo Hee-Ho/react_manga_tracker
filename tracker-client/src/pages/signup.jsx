@@ -1,4 +1,5 @@
 
+import { CreateUser } from "../actions/useraction"
 
 export default function Signup() {
     
@@ -7,7 +8,19 @@ export default function Signup() {
 
         formData.preventDefault()
 
-        console.log(formData.target.user.value,formData.target.pw.value,formData.target.confpw.value)
+        const data = {
+            username: formData.target.user.value,
+            email: formData.target.email.value,
+            pw: formData.target.pw.value,
+            conf: formData.target.confpw.value
+        }
+
+        if (data.conf !== data.pw) {
+            alert("Passwords must match!")
+            return
+        }
+
+        const res = CreateUser(data)
     };
 
 
@@ -20,8 +33,12 @@ export default function Signup() {
                     <input name="user" type="text" minLength={1} maxLength={40} placeholder="Username" size={40} required/>
                 </div>
                 <div>
+                    <label>Email: </label>
+                    <input name="email" type="email" minLength={3} placeholder="example@gmail.com" size={40} required/>
+                </div>
+                <div>
                     <label>Password: </label>
-                    <input name="pw" type="password" minLength={1} placeholder="Password" size={40}  required/>
+                    <input name="pw" type="password" minLength={1} placeholder="Password" size={40} required/>
                 </div>
                 <label>Confirm Password: </label>
                 <input name="confpw" type="password" minLength={1} placeholder="Password" size={40} required/>
