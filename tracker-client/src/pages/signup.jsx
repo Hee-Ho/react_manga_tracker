@@ -1,10 +1,11 @@
 
+import { Link } from "react-router-dom";
 import { CreateUser } from "../actions/useraction"
 
 export default function Signup() {
     
 
-    const SubmitForm = (formData) => {
+    const SubmitForm = async (formData) => {
 
         formData.preventDefault()
 
@@ -15,12 +16,7 @@ export default function Signup() {
             conf: formData.target.confpw.value
         }
 
-        if (data.conf !== data.pw) {
-            alert("Passwords must match!")
-            return
-        }
-
-        const res = CreateUser(data)
+        await CreateUser(data)
     };
 
 
@@ -44,6 +40,13 @@ export default function Signup() {
                 <input name="confpw" type="password" minLength={1} placeholder="Password" size={40} required/>
                 <button type="submit">Submit</button>
             </form>
+            <div>
+                <Link to={"/login"}>Login</Link>
+            </div>
+            <div>
+                <Link to={"/"}>Home</Link>
+            </div>
+
         </div>
         
     )
