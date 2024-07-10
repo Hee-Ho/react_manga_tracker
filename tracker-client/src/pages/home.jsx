@@ -6,7 +6,12 @@ export default function Home() {
     return (
         <div>
             <h1>Home page</h1>
-            <Link to={"/login"}>Login</Link>
+            <div>
+                <Link to={"/login"}>Login</Link>
+            </div>
+            <div>
+                <Link to={"/signup"}>Signup</Link>
+            </div>
         </div>
     )
 }
