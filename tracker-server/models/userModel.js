@@ -23,6 +23,5 @@ export const queryCreateAccount = async(username, password, salt) => {
       throw Error ("Unable to create account")
     }
 
-
 }
 
