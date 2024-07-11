@@ -3,9 +3,9 @@ import dbConnection from "../database/database.js";
 //Model handle all database related action 
 export const queryLogin = async(username) => {
   try {
-    const query = 'SELECT email, password, salt FROM user_accounts WHERE email = ?'
+    const query = 'CALL spGetAccount(?)';
     const account = await dbConnection.query(query, [username]);
-    return account;
+    return account[0][0];
   } 
   catch (e) {
     throw Error ("Unable to retrieve account information")
@@ -14,15 +14,14 @@ export const queryLogin = async(username) => {
 
 export const queryCreateAccount = async(username, password, salt) => {
     //execute stored procedure
+    //maybe make it return id?
     try {
-      const query = 'SET @status = ""; CALL spCreateAccount(?, ?, ?, @status); SELECT @status as message;';
-      const result = await dbConnection.query(query, [username, password,salt])
-      return result[0][2][0].message;
+      const query = 'SET @status = ""; SET @uid = 0; CALL spCreateAccount(?, ?, ?, @status, @uid); SELECT @status as message, @uid as user_id;';
+      const result = await dbConnection.query(query, [username, password, salt])
+      return result[0][3][0];
     }
     catch (e) {
       throw Error ("Unable to create account")
     }
-
-
 }
 

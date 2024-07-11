@@ -7,52 +7,87 @@ const saltround = 10;
 export const userLogin = async(req, res) => {
   try {
     if (!loginValidation(req.body)) {
-      res.status(400).send("Bad request")
-      return;
+      return res.status(400).send({
+        status: "Failed",
+        message: "Bad request"})
     }
     const hash_email = createHash('sha256').update(req.body.email).digest('hex'); 
     const data = await queryLogin(hash_email);
     //data from db is in the first element of array
-    if (data[0].length < 1) {
-      res.status(404).send("Account not found");
-      return;
+    if (data.length < 1) {
+      return res.status(404).send({
+        status: "Failed", 
+        message: "Account not found"
+      });
     }
-    const {password, salt} = data[0][0];
+    const {user_id, password} = data[0];
     bcrypt.compare(req.body.password, password, (err, result) => {
       if (err) {
-        console.log(err.message);
-        res.status(500).send(err.message);
+        return res.status(500).send({
+          status: "Failed",
+          message: "Internal server error"
+        });
       }
       if (!result) {
-        res.status(401).send("Incorrect password");
-        return;
+        return res.status(401).send({
+          status: "Failed",
+          message: "Incorrect password"
+        });
       }
       else {
-        res.status(200).send("Success");
-        return;
+        return res.status(200).send( {
+          status: "Success",
+          message: "Logged in successfully",
+          payload: {
+            uid: user_id,
+            email: hash_email
+          }
+        });
       }
     })
   }
   catch (e) {
-    res.status(500).send(`Internal server error: ${e.message}`);
+    res.status(500).send({
+      status: "Failed", 
+      message: `Internal server error: ${e.message}`
+    });
   }
 }
 
 export const createAccount = async(req, res) => {
   try {
     if (!loginValidation(req.body)) {
-      res.status(400).send("Bad request")
-      return;
+      return res.status(400).send({
+        status: "Failed",
+        message: "Bad request"})
     }
     const hash_email = createHash('sha256').update(req.body.email).digest('hex'); 
     const salt = await bcrypt.genSalt(saltround);
     const hash_pw = await bcrypt.hash(req.body.password, salt);
     //insert into db
-    const message = await queryCreateAccount(hash_email, hash_pw, salt);
-    res.status(200).send(`response: ${message}`);
+    const {message, user_id} = await queryCreateAccount(hash_email, hash_pw, salt);
+      if (user_id == null) {
+        return res.status(200).send({
+        status: "Success",
+        message: message
+        });
+      }
+      else {
+        return res.status(201).send({
+          status: "Success",
+          message: message,
+          payload: {
+            uid: user_id,
+            email: hash_email
+          }
+        });
+      }
   }
   catch (e) {
-    res.status(500).send(`Internal server error: ${e.message}`);
+    return res.status(500).send({
+      status: "Failed", 
+      message: `Internal server error: ${e.message}`
+    });
   }
 }
 
