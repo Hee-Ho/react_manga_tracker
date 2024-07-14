@@ -40,7 +40,6 @@ export const userLogin = async(req, res) => {
           message: "Logged in successfully",
           payload: {
             uid: user_id,
-            email: hash_email
           }
         });
       }
@@ -78,7 +77,6 @@ export const createAccount = async(req, res) => {
           message: message,
           payload: {
             uid: user_id,
-            email: hash_email
           }
         });
       }
