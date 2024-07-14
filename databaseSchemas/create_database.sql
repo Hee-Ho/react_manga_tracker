@@ -10,24 +10,38 @@ CREATE TABLE User_accounts (
     PRIMARY KEY (user_id)
 );
 
-CREATE TABLE Manga_status ( 
+
+CREATE TABLE Manga ( 
 	b_id VARCHAR(40) NOT NULL,
-    title VARCHAR(255) NOT NULL,
-    author VARCHAR(255) NOT NULL,
-    b_type VARCHAR(40) NOT NULL,
-    b_status VARCHAR(40) NOT NULL,
+    title_en VARCHAR(255) NOT NULL,
+    b_status INT NOT NULL,
     updatedAt DATETIME NOT NULL,
+    image_path VARCHAR(255),
 	PRIMARY KEY(b_id)
 );
+
+CREATE TABLE manga_status (
+	status_code INT NOT NULL, 
+    status_name VARCHAR(50) NOT NULL
+);
+
+INSERT INTO manga_status VALUE (0, "cancelled");
+INSERT INTO manga_status VALUE (1, "ongoing");
+INSERT INTO manga_status VALUE (2, "complete");
+INSERT INTO manga_status VALUE (3, "hiatus");
 
 CREATE TABLE Tracking_list (
 	user_id INT NOT NULL,
     b_id VARCHAR(40) NOT NULL,
     PRIMARY KEY (user_id, b_id),
-    FOREIGN KEY (user_id) REFERENCES User_accounts(user_id),
-    FOREIGN KEY (b_id) REFERENCES Manga_status(b_id)
+    FOREIGN KEY (user_id) REFERENCES User_accounts(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (b_id) REFERENCES Manga(b_id) ON DELETE CASCADE
 );
+CREATE INDEX uid_index on tracking_list (user_id);
 
+
+-- FUTURE DB TABLE, DO NOT RUN--------------------------------------------------------------------------------------------------------------------
+/*
 CREATE TABLE Posts (
 	post_id INT NOT NULL AUTO_INCREMENT,
     creator_id INT NOT NULL,
@@ -43,6 +57,4 @@ CREATE TABLE Comments (
     PRIMARY KEY (comment_id),
     FOREIGN KEY (post_id) REFERENCES Posts(post_id)
 );
-
-INSERT into manga_status VALUES('random id', 'Berserk', 'Kentarou Miura','seinen', 'Ongoing', now());
-SELECT * from manga_status
+*/

@@ -13,8 +13,6 @@ export const queryLogin = async(username) => {
 }
 
 export const queryCreateAccount = async(username, password, salt) => {
-    //execute stored procedure
-    //maybe make it return id?
     try {
       const query = 'SET @status = ""; SET @uid = 0; CALL spCreateAccount(?, ?, ?, @status, @uid); SELECT @status as message, @uid as user_id;';
       const result = await dbConnection.query(query, [username, password, salt])
