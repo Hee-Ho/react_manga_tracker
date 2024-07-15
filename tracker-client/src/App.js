@@ -13,7 +13,7 @@ import {
 import Home from "./pages/home"
 import Login from "./pages/login"
 import Signup from './pages/signup';
-
+import MangaInfo from './pages/manga_data';
 
 const routes = createBrowserRouter([
   {
@@ -27,7 +27,12 @@ const routes = createBrowserRouter([
   {
     path: "signup",
     element: <Signup />
+  },
+  {
+    path: "manga/:mangaID",
+    element: <MangaInfo />
   }
+
 ]
 
 )
