@@ -14,6 +14,7 @@ import Home from "./pages/home"
 import Login from "./pages/login"
 import Signup from './pages/signup';
 import MangaInfo from './pages/manga_data';
+import MangaOverall from './pages/manga_overall';
 
 const routes = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const routes = createBrowserRouter([
   {
     path: "signup",
     element: <Signup />
+  },
+  {
+    path: "manga",
+    element: <MangaOverall />
   },
   {
     path: "manga/:mangaID",
