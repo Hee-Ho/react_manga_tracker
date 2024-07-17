@@ -11,7 +11,7 @@ BEGIN
 	DECLARE status_code INT DEFAULT 0;
     IF bstatus = 'ongoing' THEN 
 		SET status_code = 1;
-	ELSEIF bstatus = 'complete' THEN 
+	ELSEIF bstatus = 'completed' THEN 
 		SET status_code = 2;
 	ELSEIF bstatus = 'hiatus' THEN 
 		SET status_code = 3;
