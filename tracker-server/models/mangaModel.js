@@ -13,14 +13,14 @@ export const queryAllManga = async() => {
 
 export const queryAddToDB = async(manga) => {
   try {
-    const query = "CALL spInsertManga(?, ?, ?, ?,?)"; 
+    const query = "CALL spInsertManga(?, ?, ?, ?, ?)"; 
     const {id, title_en, status, updated_At} = manga;
     const image_path = "path";
     await dbConnection.query(query, [id, title_en, status, updated_At, image_path]);
     return
   } 
   catch (e) {
-    throw Error ("Unable to add manga record")
+    throw Error ("Unable to add manga record");
   }
 }
 
@@ -48,9 +48,10 @@ export const queryRemoveTracking = async(manga_id, user_id) => {
   }
 }
 
+//Will set offset for pagination
 export const queryUserTracking = async(user_id) => {
   try {
-    const query = "SELECT userTrack.user_id ,manga.b_id, manga.title_en, manga.b_status, manga.updatedAt FROM manga RIGHT JOIN (SELECT user_id, b_id FROM tracking_list WHERE user_id = ?) AS userTrack ON manga.b_id = userTrack.b_id;"
+    const query = "SELECT manga.b_id, manga.title_en, s.status_name, manga.updatedAt FROM manga RIGHT JOIN (SELECT user_id, b_id FROM tracking_list WHERE user_id = ?) AS userTrack ON manga.b_id = userTrack.b_id LEFT JOIN manga_status as s on s.status_code = manga.b_status LIMIT 10 OFFSET 10;"
     const data = await dbConnection.query(query, [user_id]);
     return data[0];
   } 

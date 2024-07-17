@@ -21,10 +21,7 @@ export const getAllManga = async(req, res) => {
 export const addManga = async(req, res) => {
   try {
     if (!checkMangaFields(req.body) ) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Bad request"
-      })
+      return res.status(400).json(code400)
     }
     await queryAddToDB(req.body);
     return res.status(200).json({
@@ -41,14 +38,12 @@ export const addManga = async(req, res) => {
 export const addToTracking = async(req, res) => {
   try {
     if (req.body.manga == undefined || req.body.uid == undefined || !checkMangaFields(req.body.manga) || !checkUID(req.body.uid)) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Bad request"
-      })
+      return res.status(400).json(code400)
     }
     const {manga, uid} = req.body;
     const data = await queryAddToTracking(manga, uid);
     return res.status(200).json({
+      status: "success",
       message: data.message
     })
   }
