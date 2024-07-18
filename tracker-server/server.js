@@ -4,7 +4,7 @@ import cors from "cors";
 import userRouter from "./routes/userRoute.js";
 import mangaRouter from "./routes/mangaRoute.js";
 import dbConnection from "./database/database.js";
-import { confirmDBconnection } from "./middlewares/dbMiddleware.js";
+import { confirmDBconnection, tokenAuthentication } from "./middlewares/dbMiddleware.js";
 
 const app = express()
 const port = 8000;
@@ -24,6 +24,9 @@ app.get("/", confirmDBconnection, (req, res, next) => {
 
 //add user route
 app.use("/user", userRouter);
+
+
+app.use(tokenAuthentication); //use token authentication for manga route
 app.use("/manga", mangaRouter);
 
 
