@@ -9,7 +9,7 @@ export const getByName = async(title) => {
     url: `${baseURL}/manga`,
     params: {
         title: title,
-        limit: 1
+        limit: 10
     }
   })
   return data.data
@@ -17,5 +17,4 @@ export const getByName = async(title) => {
   catch (e) {
     throw Error ("External API error");
   }
-  
 }

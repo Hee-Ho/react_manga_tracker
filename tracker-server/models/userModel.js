@@ -12,11 +12,11 @@ export const queryLogin = async(username) => {
   }
 }
 
-export const queryCreateAccount = async(username, password, salt) => {
+export const queryCreateAccount = async(email, password, username, salt) => {
     try {
-      const query = 'SET @status = ""; SET @uid = 0; CALL spCreateAccount(?, ?, ?, @status, @uid); SELECT @status as message, @uid as user_id;';
-      const result = await dbConnection.query(query, [username, password, salt])
-      return result[0][3][0];
+      const query = 'SET @status = ""; SET @uid = 0; SET @uname = ""; CALL spCreateAccount(?, ?, ?, ?, @status, @uid, @uname); SELECT @status as message, @uid as user_id, @uname as username;';
+      const result = await dbConnection.query(query, [email, password, username, salt]);
+      return result[0][4][0];
     }
     catch (e) {
       throw Error ("Unable to create account")
