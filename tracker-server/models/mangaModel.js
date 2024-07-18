@@ -2,7 +2,7 @@ import dbConnection from "../database/database.js";
 
 export const queryAllManga = async() => {
   try {
-    const [rows] = await dbConnection.query('SELECT * FROM manga_status');
+    const [rows] = await dbConnection.query('CALL spGetAllManga');
     //console.log(rows);
     return rows;
   }
