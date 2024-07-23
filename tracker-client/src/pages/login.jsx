@@ -2,13 +2,17 @@
 
 import { Link, useNavigate } from "react-router-dom"
 import { LoginUser } from "../actions/useraction";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../App"
 
 export default function Login() {
 
     // States to reset input fields on failed login
     const [username, setUsername] = useState("")
     const [pw, setPW] = useState("")
+
+    // Set the user login if successful
+    const {user, setUser} = useContext(UserContext)
 
     function UserChange(e) {
         setUsername(e.target.value)
