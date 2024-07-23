@@ -1,0 +1,8 @@
+.cardlist {
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  /* set the number of element for each rows and the minmax size of the elements*/
+  grid-template-columns: repeat(auto-fit, minmax(245px, 245px)); 
+  
+}
