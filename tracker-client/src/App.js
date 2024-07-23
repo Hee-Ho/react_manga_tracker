@@ -5,10 +5,7 @@ import './App.css';
 import React, { createContext, useContext, useState } from 'react';
 import {
   BrowserRouter,
-  createBrowserRouter,
   Route,
-  Router,
-  RouterProvider,
   Routes,
 } from "react-router-dom"
 
@@ -22,7 +19,7 @@ import UserInfo from './pages/user_page';
 import User from './components/user';
 
 // Allows the logged in user to be passed to all routes
-export const UserContext = createContext(null)
+export const UserContext = createContext(false)
 
 function App() {
 
@@ -35,9 +32,8 @@ function App() {
         <BrowserRouter>
           <User />
           <Routes>
-            
             <Route path="/" element={<Home />} />
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<Login setUser={setUser}/>} />
             <Route path="signup" element={<Signup />} />
             <Route path="manga" element={<MangaOverall />} />
             <Route path="manga/:mangaID" element={<MangaInfo />} />

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function User() {
 
+    // If logged user is false when not logged in
     const logged_user = useContext(UserContext)
 
     return (

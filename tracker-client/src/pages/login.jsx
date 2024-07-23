@@ -5,14 +5,11 @@ import { LoginUser } from "../actions/useraction";
 import { useState, useContext } from "react";
 import { UserContext } from "../App"
 
-export default function Login() {
+export default function Login({setUser}) {
 
     // States to reset input fields on failed login
     const [username, setUsername] = useState("")
     const [pw, setPW] = useState("")
-
-    // Set the user login if successful
-    const {user, setUser} = useContext(UserContext)
 
     function UserChange(e) {
         setUsername(e.target.value)
@@ -39,6 +36,7 @@ export default function Login() {
         }
 
         if ((await LoginUser(data))) {
+            setUser(data.username)
             success_redirect()
         } else {
             setUsername('')
