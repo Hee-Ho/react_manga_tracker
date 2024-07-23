@@ -1,0 +1,16 @@
+.profile-page {
+  min-height: 100vh;
+  display: flex;
+  background-color: antiquewhite;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+@media only screen and (max-width: 500px){
+  .profile-page {
+    flex-direction: column;
+  }
+  
+}

@@ -23,7 +23,7 @@ export const tokenAuthentication = (req, res, next) => {
           Message: "Bad token"
         })
       }
-      req.user = decoded.user_id; //decode token with user information
+      req.body.uid = decoded.user_id; //decode token with user information
       next();
     }
   );
