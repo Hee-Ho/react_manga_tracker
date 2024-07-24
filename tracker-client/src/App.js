@@ -2,10 +2,11 @@
 import './App.css';
 
 // Routing mimics MPA (react is SPA)
-import React from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import {
-  createBrowserRouter,
-  RouterProvider,
+  BrowserRouter,
+  Route,
+  Routes,
 } from "react-router-dom"
 
 // Page exports for each route
@@ -16,51 +17,41 @@ import ProfilePage from './pages/ProfilePage/profilePage';
 import MangaPage from './pages/MangaPage/mangaPage';
 import MangaInfo from './pages/manga_data';
 import MangaOverall from './pages/manga_overall';
-
-const routes = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />
-  },
-  {
-    path: "login",
-    element: <Login />
-  },
-  {
-    path: "signup",
-    element: <Signup />
-  },
-  {
-    path: "manga",
-    element: <MangaOverall />
-  },
-  {
-    path: "profile/:user_id",
-    element: <ProfilePage/> 
-  },
-  {
-    path: "manga/:mangaID",
-    element: <MangaInfo />
-  },
-  {
-    path: "mangalist",
-    element: <MangaPage/>
-  }
-]
-)
+import UserInfo from './pages/user_page';
+import User from './components/user';
 
 function App() {
+// Allows the logged in user to be passed to all routes
+export const UserContext = createContext(false)
+
+function App() {
+
+  const [user, setUser] = useState(false)
+
   return (
     // Strict mode highlights possible problems. Does not create any visible elements
     // navigation will place in header
     <React.StrictMode>
+
       <div className='App'>
         
         <header className='web-header'> 
           <h4> Header: Navigation go here</h4>
         </header>
         <div className='page-wrapper'> 
-          <RouterProvider router={routes} />
+          <UserContext.Provider value={user}>
+            <BrowserRouter>
+              <User />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="login" element={<Login setUser={setUser}/>} />
+                <Route path="signup" element={<Signup />} />
+                <Route path="manga" element={<MangaOverall />} />
+                <Route path="manga/:mangaID" element={<MangaInfo />} />
+                <Route path="user/:userID" element={<UserInfo />} />
+              </Routes>
+            </BrowserRouter>
+          </UserContext.Provider>
         </div>
       </div>
     </React.StrictMode>

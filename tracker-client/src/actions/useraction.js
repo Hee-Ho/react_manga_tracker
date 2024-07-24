@@ -1,7 +1,6 @@
 // sending user creation / login data to backend
 
 import axios from "axios"
-
 const server = "http://localhost:8000";
 
 
@@ -22,22 +21,25 @@ export const CreateUser = async(userData) => {
         const url = server + "/user/createAccount";
         const res = await axios.post(
             url, {
+                username: userData.username,
                 email: userData.email,
                 password: userData.pw
             }
-
         )
-        .catch(function (err) {
-            alert("Error: " + err.response.status)
-        })
-
         if (res.data === 'response: User already exist') {
             alert("Email already in use.")
             return
         }
 
         alert("Account created!")
-        return
+        
+
+
+        .catch(function (err) {
+            alert("Error: " + err.response.status + "\nMessage: " + err.response.data.message)
+        })
+
+
 
     } catch (e) {
         console.error(e.message);
@@ -52,23 +54,20 @@ userData: Form data from login page
 export const LoginUser = async(userData) => {
     try {
         const url = server + "/user/login";
+        let status = true;
 
         await axios.post(
             url, {
-                email: userData.email,
+                username: userData.username,
                 password: userData.pw
             }
-
         )
         .catch(function (err) {
             // Make a check for error 401 => Incorrect password / user
-            alert("Error: " + err.response.status)
+            alert("Error: " + err.response.status + "\nMessage: " + err.response.data.message)
+            status = false
         })
-        .finally(function () {
-            
-            // Probably put a redirect here
-            return
-        });
+        return status
 
     } catch (e) {
         console.error(e);
