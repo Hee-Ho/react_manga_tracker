@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 export default function User() {
 
-    // If logged user is false when not logged in
-    const logged_user = useContext(UserContext)
+    // logged_in is false when not logged in
+    const logged_in = useContext(UserContext)
 
     return (
         <div>
-            {logged_user 
-            ? <div>{logged_user}</div> 
+            {logged_in 
+            ? <div>{logged_in}</div> 
             : <div>
                 <Link to={"/login"}>Login</Link>
             </div>

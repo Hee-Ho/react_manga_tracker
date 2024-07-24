@@ -19,8 +19,8 @@ import MangaInfo from './pages/manga_data';
 import MangaOverall from './pages/manga_overall';
 import UserInfo from './pages/user_page';
 import User from './components/user';
+import { UserCheck } from './components/protect_route';
 
-function App() {
 // Allows the logged in user to be passed to all routes
 export const UserContext = createContext(false)
 
@@ -48,7 +48,12 @@ function App() {
                 <Route path="signup" element={<Signup />} />
                 <Route path="manga" element={<MangaOverall />} />
                 <Route path="manga/:mangaID" element={<MangaInfo />} />
-                <Route path="user/:userID" element={<UserInfo />} />
+                <Route path="user/:userID" element={
+                  <UserCheck>
+                    <ProfilePage />
+                  </UserCheck>
+                } />
+
               </Routes>
             </BrowserRouter>
           </UserContext.Provider>
