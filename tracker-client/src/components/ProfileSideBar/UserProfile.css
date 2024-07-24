@@ -1,0 +1,11 @@
+.profile-sidebar {
+  min-width: 20%;
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-pic {
+  padding: auto;
+  background-color: aqua;
+}

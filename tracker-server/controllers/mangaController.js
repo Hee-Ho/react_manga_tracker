@@ -76,7 +76,6 @@ export const removeTracking = async(req, res) => {
 export const getUserTracking = async(req, res) => {
   try {
     const data = await queryUserTracking(req.body.uid);
-    console.log(data)
     return res.status(200).json({
       status: "success",
       payload: data

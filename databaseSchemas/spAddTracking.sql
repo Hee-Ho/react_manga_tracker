@@ -13,7 +13,7 @@ OUT status VARCHAR(50)
 BEGIN
 	CALL spInsertManga(bid, en_title, bstatus, updated_At, imagepath);
     IF EXISTS (SELECT user_id FROM user_accounts WHERE user_id = uid) THEN 
-		IF NOT EXISTS (SELECT user_id, b_id FROM tracking_list) THEN 
+		IF NOT EXISTS (SELECT user_id FROM tracking_list WHERE user_id = uid AND b_id = bid) THEN 
 			INSERT INTO tracking_list VALUES(uid, bid);
 			SET status = "Added to tracking list";
 		ELSE 
