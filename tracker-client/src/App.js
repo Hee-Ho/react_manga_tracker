@@ -2,7 +2,7 @@
 import './App.css';
 
 // Routing mimics MPA (react is SPA)
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext,useState } from 'react';
 import {
   BrowserRouter,
   Route,
@@ -46,13 +46,12 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="login" element={<Login setUser={setUser}/>} />
                 <Route path="signup" element={<Signup />} />
-                <Route path="manga" element={<MangaOverall />} />
+                
+                <Route path="manga" element={<UserCheck><MangaOverall /></UserCheck>} />
+                
+                
                 <Route path="manga/:mangaID" element={<MangaInfo />} />
-                <Route path="user/:userID" element={
-                  <UserCheck>
-                    <ProfilePage />
-                  </UserCheck>
-                } />
+                <Route path="user/:userID" element={<ProfilePage />} />
 
               </Routes>
             </BrowserRouter>
