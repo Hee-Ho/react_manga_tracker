@@ -74,3 +74,21 @@ export const LoginUser = async(userData) => {
         throw e;
     }
 }
+
+// Used to check if a users JWT token is valid for a route
+export const CheckAuth = async(route) => {
+    try {
+        const url = server + route;
+        let auth = true
+        await axios.get(url)
+        .catch(function (err) {
+            console.log("Error: " + err.response.status + "\nMessage: " + err.response.data.message)
+            auth = false
+        })
+        return auth
+
+    } catch (e) {
+        console.error(e);
+        throw e;
+    }
+}

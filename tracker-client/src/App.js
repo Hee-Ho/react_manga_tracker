@@ -2,7 +2,7 @@
 import './App.css';
 
 // Routing mimics MPA (react is SPA)
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext,useState } from 'react';
 import {
   BrowserRouter,
   Route,
@@ -19,8 +19,8 @@ import MangaInfo from './pages/manga_data';
 import MangaOverall from './pages/manga_overall';
 import UserInfo from './pages/user_page';
 import User from './components/user';
+import { UserCheck } from './components/protect_route';
 
-function App() {
 // Allows the logged in user to be passed to all routes
 export const UserContext = createContext(false)
 
@@ -46,9 +46,13 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="login" element={<Login setUser={setUser}/>} />
                 <Route path="signup" element={<Signup />} />
-                <Route path="manga" element={<MangaOverall />} />
+                
+                <Route path="manga" element={<UserCheck><MangaOverall /></UserCheck>} />
+                
+                
                 <Route path="manga/:mangaID" element={<MangaInfo />} />
-                <Route path="user/:userID" element={<UserInfo />} />
+                <Route path="user/:userID" element={<ProfilePage />} />
+
               </Routes>
             </BrowserRouter>
           </UserContext.Provider>

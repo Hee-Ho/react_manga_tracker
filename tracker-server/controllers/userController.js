@@ -2,6 +2,7 @@ import { queryLogin, queryCreateAccount } from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import { createHash } from "crypto";
 import { generateAccessToken } from "../jwt/accessToken.js";
+import { tokenAuthentication } from "../middlewares/dbMiddleware.js";
 
 const saltround = 10;
 
