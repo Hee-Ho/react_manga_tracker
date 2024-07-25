@@ -9,6 +9,7 @@ const MangaCardList = () => {
       <MangaCard> </MangaCard>
       <MangaCard> </MangaCard>
       <MangaCard> </MangaCard>
+      <MangaCard> </MangaCard>
     </div>
 
   )
