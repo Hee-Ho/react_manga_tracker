@@ -8,6 +8,7 @@ import {
   Route,
   Routes,
 } from "react-router-dom"
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // Page exports for each route
 import Home from "./pages/home"
@@ -23,6 +24,7 @@ import { UserCheck } from './components/protect_route';
 
 // Allows the logged in user to be passed to all routes
 export const UserContext = createContext(false)
+const queryClient = new QueryClient();
 
 function App() {
 
@@ -31,6 +33,7 @@ function App() {
   return (
     // Strict mode highlights possible problems. Does not create any visible elements
     // navigation will place in header
+    <QueryClientProvider client = { queryClient }>
     <React.StrictMode>
 
       <div className='App'>
@@ -59,6 +62,7 @@ function App() {
         </div>
       </div>
     </React.StrictMode>
+    </QueryClientProvider>
   );
 }
 

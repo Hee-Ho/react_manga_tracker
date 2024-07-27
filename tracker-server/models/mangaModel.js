@@ -14,9 +14,8 @@ export const queryAllManga = async() => {
 export const queryAddToDB = async(manga) => {
   try {
     const query = "CALL spInsertManga(?, ?, ?, ?, ?)"; 
-    const {id, title_en, status, updated_At} = manga;
-    const image_path = "path";
-    await dbConnection.query(query, [id, title_en, status, updated_At, image_path]);
+    const {id, title_en, status, updated_At, fileName} = manga;
+    await dbConnection.query(query, [id, title_en, status, updated_At, fileName]);
     return
   } 
   catch (e) {
@@ -27,9 +26,8 @@ export const queryAddToDB = async(manga) => {
 export const queryAddToTracking = async(manga, user_id) => {
   try {
     const query = 'SET @status = ""; CALL spAddTracking(?, ?, ?, ?, ?, ?, @status); SELECT @status as message;';
-    const {id, title_en, status, updated_At} = manga;
-    const image_path = "path";
-    const result = await dbConnection.query(query, [id, title_en, status, updated_At, image_path, user_id]);
+    const {id, title_en, status, updated_At, fileName} = manga;
+    const result = await dbConnection.query(query, [id, title_en, status, updated_At, fileName, user_id]);
     return result[0][2][0]
   }
   catch (e) {
@@ -64,7 +62,6 @@ export const queryUserTracking = async(user_id) => {
   try {
     const query = "SELECT manga.b_id, manga.title_en, s.status_name, manga.updatedAt FROM manga RIGHT JOIN (SELECT user_id, b_id FROM tracking_list WHERE user_id = ?) AS userTrack ON manga.b_id = userTrack.b_id LEFT JOIN manga_status as s on s.status_code = manga.b_status LIMIT 10 OFFSET 0;"
     const data = await dbConnection.query(query, [user_id]);
-    console.log(data);
     return data[0];
   } 
   catch (e) {
