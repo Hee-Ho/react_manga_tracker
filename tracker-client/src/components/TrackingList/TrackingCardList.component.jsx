@@ -1,4 +1,6 @@
 import TrackingCard from "./TrackingCard.component";
+import { getUserTracking } from "../../actions/mangaAction";
+
 import "./TrackingCardList.css"
 
 const TrackingCardList = () => {
