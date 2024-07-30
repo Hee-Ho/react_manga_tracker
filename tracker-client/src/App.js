@@ -33,9 +33,9 @@ function App() {
   return (
     // Strict mode highlights possible problems. Does not create any visible elements
     // navigation will place in header
-    <QueryClientProvider client = { queryClient }>
+    
     <React.StrictMode>
-
+      <QueryClientProvider client = { queryClient }>
       <div className='App'>
         
         <header className='web-header'> 
@@ -50,9 +50,9 @@ function App() {
                 <Route path="login" element={<Login setUser={setUser}/>} />
                 <Route path="signup" element={<Signup />} />
                 
-                <Route path="manga" element={<UserCheck><MangaOverall /></UserCheck>} />
+                <Route path="manga" element={<UserCheck> <MangaOverall /> </UserCheck>} />
                 
-                
+                <Route path="testManga" element={<MangaPage/> }/>
                 <Route path="manga/:mangaID" element={<MangaInfo />} />
                 <Route path="user/:userID" element={<ProfilePage />} />
 
@@ -61,8 +61,10 @@ function App() {
           </UserContext.Provider>
         </div>
       </div>
+
+      </QueryClientProvider>
     </React.StrictMode>
-    </QueryClientProvider>
+    
   );
 }
 
