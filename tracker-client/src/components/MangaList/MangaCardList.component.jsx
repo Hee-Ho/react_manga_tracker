@@ -1,15 +1,12 @@
 import MangaCard from "./MangaCard.component"
 import "./MangaCardList.css"
 
-const MangaCardList = () => {
+const MangaCardList = ({mlist}) => {
   return (
     <div className="cardlist"> 
-      <MangaCard> </MangaCard>
-      <MangaCard> </MangaCard>
-      <MangaCard> </MangaCard>
-      <MangaCard> </MangaCard>
-      <MangaCard> </MangaCard>
-      <MangaCard> </MangaCard>
+        {mlist.map((manga) => (
+          <MangaCard key={manga.id} manga={manga}> </MangaCard>
+        ))}
     </div>
 
   )

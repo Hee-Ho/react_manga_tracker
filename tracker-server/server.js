@@ -24,9 +24,6 @@ app.get("/", confirmDBconnection, (req, res, next) => {
 
 //add user route
 app.use("/user", userRouter);
-
-
-app.use(tokenAuthentication); //use token authentication for manga route
 app.use("/manga", mangaRouter);
 
 
