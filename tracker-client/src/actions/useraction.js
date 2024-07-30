@@ -26,6 +26,10 @@ export const CreateUser = async(userData) => {
                 password: userData.pw
             }
         )
+        .catch(function (err) {
+            alert("Error: " + err.response.status + "\nMessage: " + err.response.data.message)
+        })
+
         if (res.data === 'response: User already exist') {
             alert("Email already in use.")
             return
@@ -35,9 +39,7 @@ export const CreateUser = async(userData) => {
         
 
 
-        .catch(function (err) {
-            alert("Error: " + err.response.status + "\nMessage: " + err.response.data.message)
-        })
+
 
 
 
@@ -56,7 +58,7 @@ export const LoginUser = async(userData) => {
         const url = server + "/user/login";
         let status = true;
 
-        const data = await axios.post(
+        await axios.post(
             url, {
                 username: userData.username,
                 password: userData.pw
@@ -79,47 +81,11 @@ export const LoginUser = async(userData) => {
     }
 }
 
-
-export const LoginUserTest = async(userData) => {
-    try {
-        const url = server + "/user/login";
-        const data = await axios.post(
-            url, {
-                username: userData.username,
-                password: userData.pw
-            },
-            {
-                withCredentials: true
-            }
-        )
-        console.log(data)
-        return true;
-    } 
-    catch (error) {
-        if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            console.log(error.response.data);
-            console.log(error.response.status);
-            alert("Error: " + error.response.status + "\nMessage: " + error.response.data.message)
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            console.log(error.request);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
-          }
-          console.log(error.config);      
-    }
-}
-
 // Used to check if a users JWT token is valid for a route
 export const CheckAuth = async(route) => {
     try {
         const url = server + route;
-        let auth = true
+        let auth = true;
         await axios.get(url)
         .catch(function (err) {
             console.log("Error: " + err.response.status + "\nMessage: " + err.response.data.message)
