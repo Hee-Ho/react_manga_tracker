@@ -4,8 +4,7 @@ import "./profilePage.css";
 import TrackingCardList from "../../components/TrackingList/TrackingCardList.component";
 
 const ProfilePage = () => {
-  let {user_id} = useParams();
-
+  const user_id = 1;
   return (
     <div className="profile-page">
       <UserProfile className="sidebar" user_id={user_id}> </UserProfile>

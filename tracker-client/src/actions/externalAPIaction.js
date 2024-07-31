@@ -2,11 +2,14 @@ import axios from 'axios'
 
 const baseURL = "http://localhost:8000"
 
-export const getByName = async(title, limit=10) => {
+export const getManga= async(title="", limit=10) => {
   try {
     const { data } = await axios({
     method: 'GET',
-    url: `${baseURL}/manga/dexapi/${title}`
+    url: `${baseURL}/manga/dexapi/${title}`,
+    params: {
+      limit: limit
+    }
   })
   return data.data;
   }

@@ -1,23 +1,31 @@
 import { useState } from "react";
 import MangaCardList from "../../components/MangaList/MangaCardList.component";
-import { loadManga } from "../../actions/externalAPIaction";
+import { getManga } from "../../actions/externalAPIaction";
 import "./mangaPage.css"
 import { useQuery } from "@tanstack/react-query";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const MangaPage = () => {
-  const [search, setSearch] = useState(""); 
+  const [urlSearchParam, seturlSearchParam] = useSearchParams()
+  const [search, setSearch] = useState();
 
-  let {data, isLoading, isError} = useQuery({
+  let {data, isLoading, isError, refetch} = useQuery({
     queryKey: ["mangaList"],
-    queryFn:  () => loadManga()
+    queryFn:  () => getManga(urlSearchParam.get("title"))
   });
   //setting the search text
   const setSearchString = e => {
     setSearch(e.target.value);
   } 
 
-  const onSearchClick = () => {
-    //make it move to another page?
+  const onSearchClick = e => {
+    //reload page with search param
+    if (search === undefined) {
+      return
+    }
+    seturlSearchParam({title: search});
+    window.location.reload();
+    
   }
 
   if (isLoading) {
@@ -35,8 +43,8 @@ const MangaPage = () => {
   console.log(data);
   return (
     <div className="manga-page"> 
-      <input type="search" className="manga-search" onChange={setSearchString}/>
-      <button> Search </button>
+      <input type="search" placeholder={urlSearchParam.get("title")} className="manga-search" onChange={setSearchString}/>
+      <button onClick={onSearchClick}> Search </button>
       <MangaCardList mlist={data}> </MangaCardList>
     </div>
   )

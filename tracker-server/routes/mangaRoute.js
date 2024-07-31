@@ -1,6 +1,6 @@
 import express from "express";
 import { getAllManga, addManga, addToTracking, removeTracking, getUserTracking } from "../controllers/mangaController.js";
-import { getByTitleAPI, getRandomAPI } from "../controllers/mangadexController.js";
+import { getMangaAPI } from "../controllers/mangadexController.js";
 import { tokenAuthentication } from "../middlewares/dbMiddleware.js";
 
 
@@ -12,6 +12,5 @@ mangaRouter.delete("/removetracking", tokenAuthentication, removeTracking);
 mangaRouter.post("/addmanga", addManga);
 
 //mangaDex API
-mangaRouter.get("/dexapi/:title", getByTitleAPI); 
-mangaRouter.get("/dexapi", getRandomAPI);
+mangaRouter.get("/dexapi/:title?", getMangaAPI); 
 export default mangaRouter;

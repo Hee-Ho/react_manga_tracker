@@ -1,0 +1,9 @@
+.nav-bar {
+  display: flex;
+  margin-top: auto;
+  
+}
+
+div li {
+  margin-left: 30px;
+}
