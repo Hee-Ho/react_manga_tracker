@@ -21,6 +21,7 @@ import MangaOverall from './pages/manga_overall';
 import UserInfo from './pages/user_page';
 import User from './components/user';
 import { UserCheck } from './components/protect_route';
+import NavigationBar from './components/Navbar/navbar';
 
 // Allows the logged in user to be passed to all routes
 export const UserContext = createContext(false)
@@ -38,12 +39,13 @@ function App() {
       <QueryClientProvider client = { queryClient }>
       <div className='App'>
         
-        <header className='web-header'> 
-          <h4> Header: Navigation go here</h4>
-        </header>
+
         <div className='page-wrapper'> 
           <UserContext.Provider value={user}>
             <BrowserRouter>
+            <header className='web-header'> 
+              <NavigationBar/>
+            </header>
               <User />
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -52,9 +54,9 @@ function App() {
                 
                 <Route path="manga" element={<UserCheck> <MangaOverall /> </UserCheck>} />
                 
-                <Route path="testManga" element={<MangaPage/> }/>
+                <Route path="testManga/?title=:title?" element={<MangaPage/> }/>
                 <Route path="manga/:mangaID" element={<MangaInfo />} />
-                <Route path="user/:userID" element={<ProfilePage />} />
+                <Route path="user" element={<ProfilePage />} />
 
               </Routes>
             </BrowserRouter>
