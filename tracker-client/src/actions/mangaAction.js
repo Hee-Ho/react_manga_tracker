@@ -6,9 +6,8 @@ axios.defaults.withCredentials = true;
 export const getUserTracking = async() => {
   try {
     const url = server + "/manga/usertracking";
-    const { payload } = await axios.get(url);
-    console.log(payload)
-    return payload
+    const { data } = await axios.get(url);
+    return data.payload
 
   } catch (error) {
     if (error.response) {
