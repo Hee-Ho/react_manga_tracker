@@ -11,14 +11,12 @@ import {
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // Page exports for each route
-import Home from "./pages/home"
-import Login from "./pages/login"
-import Signup from './pages/signup';
+import Home from "./pages/HomePage/home"
+import Login from "./pages/LoginPage/login"
+import Signup from "./pages/SignupPage/signup";
 import ProfilePage from './pages/ProfilePage/profilePage';
 import MangaPage from './pages/MangaPage/mangaPage';
-import MangaInfo from './pages/manga_data';
-import MangaOverall from './pages/manga_overall';
-import UserInfo from './pages/user_page';
+import MangaInfo from './pages/SpecificMangaPage/manga_data';
 import User from './components/user';
 import { UserCheck } from './components/protect_route';
 import NavigationBar from './components/Navbar/navbar';
@@ -51,8 +49,6 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="login" element={<Login setUser={setUser}/>} />
                 <Route path="signup" element={<Signup />} />
-                
-                <Route path="manga" element={<UserCheck> <MangaOverall /> </UserCheck>} />
                 
                 <Route path="testManga/?title=:title?" element={<MangaPage/> }/>
                 <Route path="manga/:mangaID" element={<MangaInfo />} />
