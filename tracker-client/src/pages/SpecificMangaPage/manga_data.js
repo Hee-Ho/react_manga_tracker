@@ -2,7 +2,7 @@
 // This import allows the dynamic URL routing based on manga ID
 import { useParams } from "react-router-dom";
 
-import MangaLink from "../components/manga_link";
+import MangaLink from "../../components/manga_link";
 
 
 
