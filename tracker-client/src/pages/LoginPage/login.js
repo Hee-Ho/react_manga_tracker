@@ -48,7 +48,9 @@ export default function Login({setUser}) {
     return (
         <div class="loginArea">
             <div class="centerArea">
-                <h1>Login page</h1>
+                <h1>Login to your account</h1>
+                <hr />
+                <div class="space"/>
                 <form onSubmit={SubmitForm}>
                     <div class="formGrouping">
                         <div class="inputGrouping">
@@ -59,15 +61,10 @@ export default function Login({setUser}) {
                             <label class="textLabel">Password: </label>
                             <input class="inputArea" value={pw} onChange={PWChange} name="pw" type="password" minLength={1} placeholder="Password" size={40} required/>
                         </div>
-                        <button type="submit">Submit</button>
+                        <div class="space"/>
+                        <button type="submit">Login</button>
                     </div>
                 </form>
-                <div>
-                    <Link to={"/signup"}>Signup</Link>
-                </div>
-                <div>
-                    <Link to={"/"}>Home</Link>
-                </div>
             </div>
         </div>
     )

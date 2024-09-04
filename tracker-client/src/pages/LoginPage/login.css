@@ -1,21 +1,28 @@
 .loginArea {
     padding-top: 50px;
     padding-bottom: 100px;
+    height: 100%;
     display: flex;
     justify-content: center;
-    border: solid green;
-    background-color: rgb(40, 96, 145);
+    border: solid black;
+    border-width: 1px;
+    background: transparent;
 }
 
 .centerArea{
     display: flex;
     margin: auto;
     flex-direction: column;
-    border: solid slateblue;
-    background-color: aqua;
-    padding-left: 20%;
-    padding-right: 20%;
-    padding-bottom: 200px;
+    border: solid #35343b;
+    background-color: #cacaca;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 100px;
+    border-radius: 10px;
+}
+
+.space{
+    height: 25px;
 }
 
 .formGrouping {
@@ -26,14 +33,38 @@
 
 .textLabel {
     font-style: normal;
-    color: black;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
 }
 
 button {
-    background: transparent;
-    
+    border-style: solid;
+    border-color: black;
+    color: white;
+    background-color: #5f5fe8;
+    font-size: 25px;
+    border-style: outset;
+    border-width: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #3d3dd6;
+}
+button:active {
+    border-style: inset;
+    border-width: 5px;
 }
 
+hr {
+    text-align: center;
+    width: 100%;
+    border-color: black;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+}
 
 .inputGrouping {
     display: flex;
@@ -41,11 +72,35 @@ button {
     row-gap: 10px;
 }
 
+@keyframes outline {
+    0% {
+        outline-style: solid;
+        outline-width: thick;
+        outline-color: rgba(95, 95, 232, 0);
+    }
+    100% {
+        outline-style: solid;
+        outline-width: thick;
+        outline-color: rgb(95, 95, 232, 1);
+    }
+}
+
 .inputArea {
     opacity: .75;
+    border-radius: 5px;
+    box-shadow: 3px 3px;
+    height: 20px;
+    font-size: 20px;
 }
 
 .inputArea:focus{
     opacity: 1;
+    border-radius: 0px;
+    box-shadow: none;
+    outline-style: solid;
+    outline-width: thick;
+    outline-color: rgb(95, 95, 232);
+    animation-name: outline;
+    animation-duration: 500ms;
 }
 
