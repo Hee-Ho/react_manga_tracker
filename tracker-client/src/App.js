@@ -18,6 +18,7 @@ import ProfilePage from './pages/ProfilePage/profilePage';
 import MangaPage from './pages/MangaPage/mangaPage';
 import MangaInfo from './pages/manga_data';
 import MangaOverall from './pages/manga_overall';
+import MangaInfoPage from './pages/MangaInfoPage/MangaInfoPage';
 import UserInfo from './pages/user_page';
 import User from './components/user';
 import { UserCheck } from './components/protect_route';
@@ -55,6 +56,7 @@ function App() {
                 <Route path="manga" element={<UserCheck> <MangaOverall /> </UserCheck>} />
                 
                 <Route path="testManga/?title=:title?" element={<MangaPage/> }/>
+                <Route path="testManga/manga/:mangaID" element={<MangaInfoPage/>} errorElement={<MangaPage/> }/> 
                 <Route path="manga/:mangaID" element={<MangaInfo />} />
                 <Route path="user" element={<ProfilePage />} />
 

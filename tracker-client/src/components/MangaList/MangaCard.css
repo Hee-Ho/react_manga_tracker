@@ -22,6 +22,10 @@
   text-align: center;
 }
 
+.full-title {
+  display: none;
+}
+
 .image-cell {
   width: 210px;
   height: 245px;

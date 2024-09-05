@@ -3,4 +3,6 @@
   /* set the number of element for each rows and the minmax size of the elements*/
   grid-template-columns: repeat(auto-fit, minmax(250px, 250px)); 
   justify-content: center;
+  justify-items: center;
+  margin: auto;
 }
