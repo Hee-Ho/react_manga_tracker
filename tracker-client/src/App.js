@@ -16,6 +16,9 @@ import Login from "./pages/LoginPage/login"
 import Signup from "./pages/SignupPage/signup";
 import ProfilePage from './pages/ProfilePage/profilePage';
 import MangaPage from './pages/MangaPage/mangaPage';
+import MangaOverall from './pages/manga_overall';
+import MangaInfoPage from './pages/MangaInfoPage/MangaInfoPage';
+import UserInfo from './pages/user_page';
 import MangaInfo from './pages/SpecificMangaPage/manga_data';
 import User from './components/user';
 import { UserCheck } from './components/protect_route';
@@ -51,6 +54,7 @@ function App() {
                 <Route path="signup" element={<Signup />} />
                 
                 <Route path="testManga/?title=:title?" element={<MangaPage/> }/>
+                <Route path="testManga/manga/:mangaID" element={<MangaInfoPage/>} errorElement={<MangaPage/> }/> 
                 <Route path="manga/:mangaID" element={<MangaInfo />} />
                 <Route path="user" element={<ProfilePage />} />
 
