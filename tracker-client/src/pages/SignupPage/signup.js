@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { CreateUser } from "../actions/useraction"
+import { CreateUser } from "../../actions/useraction"
 
 export default function Signup() {
     
