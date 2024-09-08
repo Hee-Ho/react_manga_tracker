@@ -1,6 +1,14 @@
 .mangaInfo-page {
+  padding-top: 3dvh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color:aqua;
+  text-align: center;
+}
+
+.cover-cell {
+  height: 750px;
+  min-width: 500px;
 }
