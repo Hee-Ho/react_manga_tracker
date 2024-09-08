@@ -3,13 +3,13 @@ import MangaCardList from "../../components/MangaList/MangaCardList.component";
 import { getManga } from "../../actions/externalAPIaction";
 import "./mangaPage.css"
 import { useQuery } from "@tanstack/react-query";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const MangaPage = () => {
   const [urlSearchParam, seturlSearchParam] = useSearchParams()
   const [search, setSearch] = useState();
 
-  let {data, isLoading, isError, refetch} = useQuery({
+  let {data, isLoading, isError} = useQuery({
     queryKey: ["mangaList"],
     queryFn:  () => getManga(urlSearchParam.get("title"))
   });
@@ -40,7 +40,6 @@ const MangaPage = () => {
     )
   }
 
-  console.log(data);
   return (
     <div className="manga-page"> 
       <input type="search" placeholder={urlSearchParam.get("title")} className="manga-search" onChange={setSearchString}/>

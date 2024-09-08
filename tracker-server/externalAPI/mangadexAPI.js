@@ -24,6 +24,19 @@ export const getByName = async(title, limit=10) => {
   }
 }
 
+export const getByID = async(manga_id) => {
+  try {
+    const { data } = await axios.get(`${baseURL}/manga/${manga_id}`);
+    
+    const manga = await parseManga(data.data);
+    return manga;
+  } 
+  catch (e) {
+    throw {status: e.response.status, message: e.response.statusText};
+  }
+
+}
+
 export const getRandom = async(limit = 10) => {
   try {
     const { data } = await axios({
@@ -60,7 +73,6 @@ export const getImageFile = async(image_id) => {
     throw {status: e.response.status, message: e.response.statusText};
   }
 }
-
 
 //parsing result and get image file name
 const parseManga = async(manga) => {

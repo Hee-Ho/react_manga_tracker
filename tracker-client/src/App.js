@@ -16,9 +16,7 @@ import Login from "./pages/LoginPage/login"
 import Signup from "./pages/SignupPage/signup";
 import ProfilePage from './pages/ProfilePage/profilePage';
 import MangaPage from './pages/MangaPage/mangaPage';
-import MangaOverall from './pages/manga_overall';
 import MangaInfoPage from './pages/MangaInfoPage/MangaInfoPage';
-import UserInfo from './pages/user_page';
 import MangaInfo from './pages/SpecificMangaPage/manga_data';
 import User from './components/user';
 import { UserCheck } from './components/protect_route';
@@ -44,9 +42,7 @@ function App() {
         <div className='page-wrapper'> 
           <UserContext.Provider value={user}>
             <BrowserRouter>
-            <header className='web-header'> 
               <NavigationBar/>
-            </header>
               <User />
               <Routes>
                 <Route path="/" element={<Home />} />

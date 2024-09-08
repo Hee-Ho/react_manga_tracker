@@ -10,14 +10,3 @@
   margin-left: auto;
   margin-right: auto;
 }
-
-.web-header {
-  background-color: rgb(95, 95, 232);
-  height: 100px;
-  display: flex;
-  position: sticky;
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  top: 0%
-}
