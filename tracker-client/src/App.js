@@ -18,17 +18,24 @@ import ProfilePage from './pages/ProfilePage/profilePage';
 import MangaPage from './pages/MangaPage/mangaPage';
 import MangaInfoPage from './pages/MangaInfoPage/MangaInfoPage';
 import MangaInfo from './pages/SpecificMangaPage/manga_data';
-import User from './components/user';
 import { UserCheck } from './components/protect_route';
 import NavigationBar from './components/Navbar/navbar';
 
 // Allows the logged in user to be passed to all routes
-export const UserContext = createContext(false)
+// UserContext == bool of logged in or not
+// UID == user ID for linking to users profile
+// username == users name for displaying
+export const UserContext = createContext("")
+export const UIDContext = createContext(-1)
+
 const queryClient = new QueryClient();
 
 function App() {
 
-  const [user, setUser] = useState(false)
+  // sets values for contexts, allowing children to change the context
+  // values if necessary
+  const [user, setUser] = useState("")
+  const [userID, setUID] = useState(-1)
 
   return (
     // Strict mode highlights possible problems. Does not create any visible elements
@@ -41,21 +48,22 @@ function App() {
 
         <div className='page-wrapper'> 
           <UserContext.Provider value={user}>
-            <BrowserRouter>
-              <NavigationBar/>
-              <User />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="login" element={<Login setUser={setUser}/>} />
-                <Route path="signup" element={<Signup />} />
-                
-                <Route path="testManga/?title=:title?" element={<MangaPage/> }/>
-                <Route path="testManga/manga/:mangaID" element={<MangaInfoPage/>} errorElement={<MangaPage/> }/> 
-                <Route path="manga/:mangaID" element={<MangaInfo />} />
-                <Route path="user" element={<ProfilePage />} />
+            <UIDContext.Provider value={userID}>
+              <BrowserRouter>
+                <NavigationBar/>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="login" element={<Login setUser={setUser} setUID={setUID}/>} />
+                  <Route path="signup" element={<Signup />} />
+                  
+                  <Route path="testManga/?title=:title?" element={<MangaPage/> }/>
+                  <Route path="testManga/manga/:mangaID" element={<MangaInfoPage/>} errorElement={<MangaPage/> }/> 
+                  <Route path="manga/:mangaID" element={<MangaInfo />} />
+                  <Route path="user/:uid" element={<ProfilePage />} />
 
-              </Routes>
-            </BrowserRouter>
+                </Routes>
+              </BrowserRouter>
+            </UIDContext.Provider>
           </UserContext.Provider>
         </div>
       </div>

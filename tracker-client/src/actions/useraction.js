@@ -56,9 +56,8 @@ userData: Form data from login page
 export const LoginUser = async(userData) => {
     try {
         const url = server + "/user/login";
-        let status = true;
 
-        await axios.post(
+        const response = await axios.post(
             url, {
                 username: userData.username,
                 password: userData.pw
@@ -67,13 +66,16 @@ export const LoginUser = async(userData) => {
                 withCredentials: true
             }
         )
+        .then(res => {
+            return(res.status == 200 ? res.data.payload : false);
+        })
         .catch(function (err) {
             // Make a check for error 401 => Incorrect password / user
             console.log(err)
             alert("Error: " + err.response.status + "\nMessage: " + err.response.data.message)
-            status = false
         })
-        return status
+
+        return response
 
     } catch (e) {
         console.error(e);
