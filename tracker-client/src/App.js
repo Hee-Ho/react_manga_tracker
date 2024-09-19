@@ -49,8 +49,9 @@ function App() {
                 <Route path="login" element={<Login setUser={setUser}/>} />
                 <Route path="signup" element={<Signup />} />
                 
-                <Route path="testManga/?title=:title?" element={<MangaPage/> }/>
+                <Route path="testManga" element={<MangaPage/> }/>
                 <Route path="testManga/manga/:mangaID" element={<MangaInfoPage/>} errorElement={<MangaPage/> }/> 
+                
                 <Route path="manga/:mangaID" element={<MangaInfo />} />
                 <Route path="user" element={<ProfilePage />} />
 

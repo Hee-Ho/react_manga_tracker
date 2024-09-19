@@ -3,6 +3,7 @@ import {useQuery} from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMangaByID } from "../../actions/externalAPIaction";
+import TrackingButton from "../../components/TrackingButton/TrackingButton.component";
 
 
 //get manga info from click
@@ -32,11 +33,10 @@ const MangaInfoPage = () => {
   return (
     <div className="mangaInfo-page"> 
       <img className="cover-cell" src={image_url} alt="Manga cover" loading="lazy"/>
-      <div className="info"> 
-        <h1 className="title-box">  {data.title_en} </h1>
-        <h3 className="status-box"> status: {data.status} </h3>
-        <p className="summary-box"> {data.summary} </p>
-      </div>
+      <h1 className="title-box">  {data.title_en} </h1>
+      <TrackingButton> </TrackingButton>
+      <h3 className="status-box"> status: {data.status} </h3>
+      <p className="summary-box"> {data.summary} </p>
     </div>
   )
 }
