@@ -1,0 +1,61 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 3%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.page-bttn {
+  display: flex;
+  background-color: antiquewhite;
+  width: 3dvh;
+  height: 3dvh;
+  border: none;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-bttn:hover {
+  background-color: gray;
+}
+
+.page-bttn:active {
+  background-color: antiquewhite;
+  border: none;
+}
+
+.page-array {
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-number {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 3dvh;
+  height: 3dvh;
+  color: black;
+  font-size: 2dvh;
+}
+
+.page-active {
+  background-color: gray;
+  border: none;
+  border-radius: 50%;
+  width: 3dvh;
+  height: 3dvh;
+  color: black;
+  font-size: 2dvh;
+}
+
+.page-number:hover {
+  background-color: gray;
+}
+
+.page-number:active {
+  background-color: antiquewhite;
+  border: none;
+}

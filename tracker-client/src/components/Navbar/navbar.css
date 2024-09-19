@@ -30,8 +30,6 @@
   padding: .25rem;
 }
 
-
-
 .nav-bar li.active {
   background-color: rgb(71, 70, 70);
   pointer-events: none;
