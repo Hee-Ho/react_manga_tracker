@@ -40,12 +40,6 @@ export default function Signup() {
                 <input name="confpw" type="password" minLength={1} placeholder="Password" size={40} required/>
                 <button type="submit">Submit</button>
             </form>
-            <div>
-                <Link to={"/login"}>Login</Link>
-            </div>
-            <div>
-                <Link to={"/"}>Home</Link>
-            </div>
 
         </div>
         

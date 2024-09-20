@@ -5,7 +5,7 @@ import { LoginUser } from "../../actions/useraction";
 import { useState, useContext } from "react";
 import { UserContext } from "../../App"
 import "./login.css"
-export default function Login({setUser}) {
+export default function Login({setUser, setUID}) {
 
     // States to reset input fields on failed login
     const [username, setUsername] = useState("")
@@ -34,9 +34,10 @@ export default function Login({setUser}) {
             username: formData.target.username.value,
             pw: formData.target.pw.value,
         }
-
-        if ((await LoginUser(data))) {
-            setUser(data.username)
+        const stat = await LoginUser(data)
+        if (stat) {
+            setUser(stat.username)
+            setUID(stat.uid)
             success_redirect()
         } else {
             setUsername('')
@@ -46,22 +47,22 @@ export default function Login({setUser}) {
 
 
     return (
-        <div class="loginArea">
-            <div class="centerArea">
+        <div className="loginArea">
+            <div className="centerArea">
                 <h1>Login to your account</h1>
                 <hr />
-                <div class="space"/>
+                <div className="space"/>
                 <form onSubmit={SubmitForm}>
-                    <div class="formGrouping">
-                        <div class="inputGrouping">
-                            <label class="textLabel">Username: </label>
-                            <input class="inputArea" value={username} onChange={UserChange} name="username" type="text" minLength={1} placeholder="Username" size={40} required/>
+                    <div className="formGrouping">
+                        <div className="inputGrouping">
+                            <label className="textLabel">Username: </label>
+                            <input className="inputArea" value={username} onChange={UserChange} name="username" type="text" minLength={1} placeholder="Username" size={40} required/>
                         </div>
-                        <div class="inputGrouping">
-                            <label class="textLabel">Password: </label>
-                            <input class="inputArea" value={pw} onChange={PWChange} name="pw" type="password" minLength={1} placeholder="Password" size={40} required/>
+                        <div className="inputGrouping">
+                            <label className="textLabel">Password: </label>
+                            <input className="inputArea" value={pw} onChange={PWChange} name="pw" type="password" minLength={1} placeholder="Password" size={40} required/>
                         </div>
-                        <div class="space"/>
+                        <div className="space"/>
                         <button type="submit">Login</button>
                     </div>
                 </form>
