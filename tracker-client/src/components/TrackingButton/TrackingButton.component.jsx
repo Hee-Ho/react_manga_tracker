@@ -1,8 +1,9 @@
+import "./TrackingButton.styles.css"
 
 const TrackingButton = () => {
   return (
     <div className="button-container">
-      addTracking
+      Add Tracking
     </div>
   )
 }

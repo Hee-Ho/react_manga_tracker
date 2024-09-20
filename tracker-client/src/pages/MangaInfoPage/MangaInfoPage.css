@@ -8,7 +8,9 @@
   text-align: center;
 }
 
+
 .cover-cell {
   height: 750px;
   min-width: 500px;
+  flex-shrink: 1;
 }

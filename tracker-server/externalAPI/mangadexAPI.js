@@ -2,14 +2,15 @@ import axios from 'axios'
 
 const baseURL = "https://api.mangadex.org"
 
-export const getByName = async(title, limit=10) => {
+export const getByName = async(title, limit=12, offset= 0) => {
   try {
     const { data } = await axios({
     method: 'GET',
     url: `${baseURL}/manga`,
     params: {
         title: title,
-        limit: limit
+        limit: limit,
+        offset: offset
     }
   })
   const mangas = [];
@@ -17,33 +18,35 @@ export const getByName = async(title, limit=10) => {
     const manga = await parseManga(data.data[i]);
     mangas.push(manga);
   }
-  return mangas
+  const total = data.total; //total for pagination
+  return {mangas, total}
   }
   catch (e) {
-    throw {status: e.response.status, message: e.response.statusText};
+    throw {status: e.response.data.errors[0].status};
   }
 }
 
 export const getByID = async(manga_id) => {
   try {
     const { data } = await axios.get(`${baseURL}/manga/${manga_id}`);
-    
+    console.log("get")
     const manga = await parseManga(data.data);
     return manga;
   } 
   catch (e) {
-    throw {status: e.response.status, message: e.response.statusText};
+    throw {status: e.response.data.errors[0].status};
   }
 
 }
 
-export const getRandom = async(limit = 10) => {
+export const getRandom = async(limit = 10, offset = 0) => {
   try {
     const { data } = await axios({
     method: 'GET',
     url: `${baseURL}/manga`,
     params: {
-        limit: limit
+        limit: limit,
+        offset: offset
     }
   })
   const mangas = [];
@@ -54,7 +57,7 @@ export const getRandom = async(limit = 10) => {
   return mangas
   }
   catch (e) {
-    throw {status: e.response.status, message: e.response.statusText};
+    throw {status: e.response.data.errors[0].status};
   }
 }
 

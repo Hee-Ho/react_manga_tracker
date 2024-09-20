@@ -60,7 +60,6 @@ function App() {
                   <Route path="testManga/manga/:mangaID" element={<MangaInfoPage/>} errorElement={<MangaPage/> }/> 
                   <Route path="manga/:mangaID" element={<MangaInfo />} />
                   <Route path="user/:uid" element={<ProfilePage />} />
-
                 </Routes>
               </BrowserRouter>
             </UIDContext.Provider>
