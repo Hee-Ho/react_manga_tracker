@@ -4,7 +4,6 @@ export const getMangaAPI = async(req, res) => {
   try {
     const { title } = req.params || "";
     const { limit, offset } = req.query;
-    console.log(offset);
     const data = await getByName(title, limit, offset);
     return res.status(200).json({
       data: data

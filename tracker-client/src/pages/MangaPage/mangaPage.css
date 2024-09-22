@@ -6,16 +6,20 @@
 .search-bar {
   display: flex;
   justify-content: space-between;
-  width: 30%;
+  width: 100%;
   padding: 1%;
   font-size: medium;
+  display: flex;
+  justify-content: center;
 }
 
 .manga-search {
-  border-radius: 5%;
+  text-align: center;
+  border-radius: 20px;
   border: none;
   width: 10rem;
   height: 1.5rem;
+  width: 50%;
 }
 
 .search-bttn {

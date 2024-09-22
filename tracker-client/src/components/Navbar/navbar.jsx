@@ -14,7 +14,7 @@ const NavigationBar = () => {
         <div className="site-icon"> Manga Tracker </div>
         <ul>
           <CustomLink to="/" text="Home"> </CustomLink>
-          <CustomLink to="/testManga" text="Manga"> </CustomLink>
+          <CustomLink to="/testManga?title=&page=1" text="Manga"> </CustomLink>
           {userName!="" 
           ? <CustomLink to={profileLink} text={userName}> </CustomLink>
           :<CustomLink to="/login" text="Login"> </CustomLink>
