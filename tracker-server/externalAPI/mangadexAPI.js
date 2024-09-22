@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const baseURL = "https://api.mangadex.org"
 
-export const getByName = async(title, limit=12, offset= 0) => {
+export const getByName = async(title, limit=15, offset= 0) => {
   try {
     const { data } = await axios({
     method: 'GET',

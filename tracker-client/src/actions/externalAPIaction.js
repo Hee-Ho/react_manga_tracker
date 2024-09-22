@@ -4,16 +4,15 @@ const baseURL = "http://localhost:8000"
 
 export const getManga= async(title="", offset=0) => {
   try {
-    const limit = 12;
+    const limit = 15;
     const { data } = await axios({
     method: 'GET',
     url: `${baseURL}/manga/dexapi/${title}`,
     params: {
       limit: limit,
-      offset: (offset - 1) * 12
+      offset: (offset - 1) * limit
     }
   })
-  console.log(data.data);
   return data.data;
   }
   catch (e) {

@@ -1,45 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MangaCardList from "../../components/MangaList/MangaCardList.component";
 import Pagination from "../../components/PaginationBar/Pagination.component";
 import { getManga } from "../../actions/externalAPIaction";
 import "./mangaPage.css"
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
 const MangaPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams({page: '1'}); //set default to page 1
+  const [searchParams, setSearchParams] = useSearchParams({title: "", page: '1'}); //set default to page 1
   const [search, setSearch] = useState(searchParams.get("title") || "");
-  const [currentPage, setCurrentPage] = useState(searchParams.get("page"));
-  const navigate = useNavigate();
 
   let {data, isLoading, isError} = useQuery({
-    queryKey: ["mangaList"],
-    queryFn:  () => getManga(searchParams.get("title"), searchParams.get("page"))
+    queryKey: ["mangaList", searchParams.get("title"), searchParams.get("page")],
+    queryFn:  () => getManga(searchParams.get("title"), searchParams.get("page")),
   });
+
+  useEffect( () => {
+    setSearch(searchParams.get("title"))
+  }, [searchParams]);
+
   //setting the search text
   const setSearchString = (e) => {
     setSearch(e.target.value);
   } 
 
-  const onSearchClick = (e) => {
+  const onSearchSubmit = (e) => {
     //reload page with search param
     e.preventDefault();
     if (!search) {
       return
     }
-    setSearchParams({ title: search, page: currentPage });
-    navigate(0);
-  }
-
-  const reload = () => { //will change to useEffect instead
-    navigate(0);
-  }
-
-  if (isLoading) {
-    return (
-      <p>Loading....</p>
-    )
+    if (search != searchParams.get("title"))
+      setSearchParams({ title: search, page: 1});
   }
 
   if (isError) {
@@ -50,12 +43,23 @@ const MangaPage = () => {
 
   return (
     <div className="manga-page"> 
-      <form className="search-bar" onSubmit={onSearchClick}> 
-        <input className="manga-search" type="search" value={search} onChange={setSearchString}/>
+      <form className="search-bar" onSubmit={onSearchSubmit}> 
+        <input className="manga-search" type="search" value={search} onChange={setSearchString} />
       </form>
-      <MangaCardList mlist={data.mangas}> </MangaCardList>
-      <Pagination total_result={data.total} current_page={currentPage} searchParam={search} setSearchParams={setSearchParams} reload={reload}> </Pagination>
-      
+      <div> { 
+        isLoading? 
+        ( 
+          <p>Loading....</p> 
+        ) 
+        : 
+        (
+          <div> 
+            <MangaCardList mlist={data.mangas}> </MangaCardList>
+            <Pagination total_result={data.total} current_page={searchParams.get("page")} searchParam={searchParams.get("title")} setSearchParams={setSearchParams}> </Pagination>
+          </div>
+        )
+      }
+      </div>
     </div>
   )
 }

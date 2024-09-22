@@ -10,7 +10,6 @@ import TrackingButton from "../../components/TrackingButton/TrackingButton.compo
 const MangaInfoPage = () => {
   //check if manga exist in user tracking list
   const { mangaID } = useParams(); 
-  const navigate = useNavigate();
   //need to handles null or id is directly entered
 
   let { data, isLoading, isError} = useQuery({

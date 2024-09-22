@@ -28,7 +28,7 @@
 
 .page-array {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .page-number {
@@ -51,6 +51,12 @@
   font-size: 2dvh;
 }
 
+.page-input {
+  width: 10%;
+  text-align: center;
+  border: none;
+}
+
 .page-number:hover {
   background-color: gray;
 }
@@ -58,4 +64,8 @@
 .page-number:active {
   background-color: antiquewhite;
   border: none;
+}
+
+p {
+  margin-left: 5%;
 }
