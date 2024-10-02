@@ -26,6 +26,10 @@ export default function Login({setUser, setUID}) {
         navigate('/')
     }
 
+    const signup_redirect = () => {
+        navigate('/signup')
+    }
+
     const SubmitForm = async (formData) => {
 
         formData.preventDefault()
@@ -64,6 +68,7 @@ export default function Login({setUser, setUID}) {
                         </div>
                         <div className="space"/>
                         <button type="submit">Login</button>
+                        <button className="signup" type="button" onClick={signup_redirect}>Sign Up</button>
                     </div>
                 </form>
             </div>
