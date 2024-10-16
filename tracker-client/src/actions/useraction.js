@@ -70,8 +70,7 @@ export const LoginUser = async(userData) => {
         })
         .catch(function (err) {
             // Make a check for error 401 => Incorrect password / user
-            console.log(err)
-            alert("Error: " + err.response.status + "\nMessage: " + err.response.data.message)
+            console.log("Error: " + err.response.status + "\nMessage: " + err.response.data.message)
         })
 
         return response

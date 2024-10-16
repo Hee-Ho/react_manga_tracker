@@ -11,6 +11,8 @@ export default function Login({setUser, setUID}) {
     const [username, setUsername] = useState("")
     const [pw, setPW] = useState("")
 
+    const [failedLogin, setfailedLogin] = useState(false)
+
     function UserChange(e) {
         setUsername(e.target.value)
     }
@@ -46,6 +48,7 @@ export default function Login({setUser, setUID}) {
         } else {
             setUsername('')
             setPW('')
+            setfailedLogin(true);
         }
     };
 
@@ -66,7 +69,7 @@ export default function Login({setUser, setUID}) {
                             <label className="textLabel">Password: </label>
                             <input className="inputArea" value={pw} onChange={PWChange} name="pw" type="password" minLength={1} placeholder="Password" size={40} required/>
                         </div>
-                        <div className="space"/>
+                        <label className="failed"> {failedLogin ? "Incorrect Username or Password": ""}</label>
                         <button type="submit">Login</button>
                         <button className="signup" type="button" onClick={signup_redirect}>Sign Up</button>
                     </div>
