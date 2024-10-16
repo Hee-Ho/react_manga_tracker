@@ -48,6 +48,23 @@ export const CreateUser = async(userData) => {
     }
 }
 
+export const GetUsername = async(userid) => {
+    try {
+        const url = server + "/user/getUsername";
+
+        const response = await axios.post(
+            url, {
+                uid: userid
+            }
+        )
+        .catch(function (err) {
+            console.log("Error: " + err.response.status + "\nMessage: " + err.response.data.message)
+        })
+        return response.data.payload.username
+    } catch(e){
+        console.log("Failed to retrieve username")
+    }
+}
 /*
 userData: Form data from login page
 */

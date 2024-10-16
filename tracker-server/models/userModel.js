@@ -23,3 +23,14 @@ export const queryCreateAccount = async(email, password, username, salt) => {
     }
 }
 
+export const queryUsername = async(uid) => {
+  try {
+    const query = 'SELECT username FROM user_accounts WHERE user_id = ?;';
+    const username = await dbConnection.query(query, [uid]);
+    return username[0][0].username;
+  }
+  catch (e) {
+    throw Error ("Unable to find account")
+  }
+}
+
