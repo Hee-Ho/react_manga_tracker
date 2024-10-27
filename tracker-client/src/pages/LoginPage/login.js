@@ -3,10 +3,11 @@
 import { Link, useNavigate } from "react-router-dom"
 import { LoginUser } from "../../actions/useraction";
 import { useState, useContext } from "react";
-import { UserContext } from "../../App"
+import { useUser } from "../../UserContext";
 import "./login.css"
-export default function Login({setUser, setUID}) {
+export default function Login() {
 
+    const { login } = useUser()
     // States to reset input fields on failed login
     const [username, setUsername] = useState("")
     const [pw, setPW] = useState("")
@@ -36,8 +37,7 @@ export default function Login({setUser, setUID}) {
         }
         const stat = await LoginUser(data)
         if (stat) {
-            setUser(stat.username)
-            setUID(stat.uid)
+            login(stat.username, stat.uid)
             success_redirect()
         } else {
             setUsername('')

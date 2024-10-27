@@ -29,7 +29,6 @@ export const getByName = async(title, limit=15, offset= 0) => {
 export const getByID = async(manga_id) => {
   try {
     const { data } = await axios.get(`${baseURL}/manga/${manga_id}`);
-    console.log("get")
     const manga = await parseManga(data.data);
     return manga;
   } 

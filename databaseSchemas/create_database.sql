@@ -1,6 +1,7 @@
 CREATE DATABASE mangaTracker;
 USE mangaTracker; 
 
+-- User Table-----------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE User_accounts (
 	user_id INT NOT NULL AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL,
@@ -9,10 +10,11 @@ CREATE TABLE User_accounts (
     salt VARCHAR(40) NOT NULL,
     PRIMARY KEY (user_id)
 );
-
 ALTER TABLE user_accounts ADD username VARCHAR(255);
 CREATE INDEX username_index on user_accounts (username); -- make username a non-clustered index 
 
+
+-- Manga Table----------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Manga ( 
 	b_id VARCHAR(40) NOT NULL,
     title_en VARCHAR(255) NOT NULL,
@@ -32,6 +34,7 @@ INSERT INTO manga_status VALUE (1, "ongoing");
 INSERT INTO manga_status VALUE (2, "completed");
 INSERT INTO manga_status VALUE (3, "hiatus");
 
+-- User Tracking--------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Tracking_list (
 	user_id INT NOT NULL,
     b_id VARCHAR(40) NOT NULL,
@@ -41,7 +44,13 @@ CREATE TABLE Tracking_list (
 );
 
 
--- FUTURE DB TABLE, DO NOT RUN--------------------------------------------------------------------------------------------------------------------
+-- Blacklisted Token----------------------------------------------------------------------------------------------------------------------------
+Create Table Invalid_tokens (
+	user_id INT, 
+    iat INT
+)
+
+-- FUTURE DB TABLE, DO NOT RUN------------------------------------------------------------------------------------------------------------------
 /*
 CREATE TABLE Posts (
 	post_id INT NOT NULL AUTO_INCREMENT,

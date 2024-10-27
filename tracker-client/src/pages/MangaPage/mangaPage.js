@@ -3,7 +3,7 @@ import MangaCardList from "../../components/MangaList/MangaCardList.component";
 import Pagination from "../../components/PaginationBar/Pagination.component";
 import { getManga } from "../../actions/externalAPIaction";
 import "./mangaPage.css"
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
@@ -16,6 +16,7 @@ const MangaPage = () => {
     queryFn:  () => getManga(searchParams.get("title"), searchParams.get("page")),
   });
 
+  //changing url string 
   useEffect( () => {
     setSearch(searchParams.get("title"))
   }, [searchParams]);
@@ -31,7 +32,7 @@ const MangaPage = () => {
     if (!search) {
       return
     }
-    if (search != searchParams.get("title"))
+    if (search !== searchParams.get("title"))
       setSearchParams({ title: search, page: 1});
   }
 
