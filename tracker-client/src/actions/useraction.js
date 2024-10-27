@@ -1,9 +1,8 @@
 // sending user creation / login data to backend
-
+import { useUser } from "../UserContext";
 import axios from "axios"
 const server = "http://localhost:8000";
-
-
+axios.defaults.withCredentials = true;
 
 /*
 userData: Form data from signup.jsx page
@@ -40,7 +39,8 @@ export const CreateUser = async(userData) => {
                 alert("Account created!")
             }
         }
-        return
+
+        alert("Account created!")
 
     } catch (e) {
         console.error(e.message);
@@ -98,6 +98,11 @@ export const LoginUser = async(userData) => {
     }
 }
 
+export const LogOut = () => {
+    localStorage.clear()
+    
+}
+
 // Used to check if a users JWT token is valid for a route
 export const CheckAuth = async(route) => {
     try {
@@ -113,5 +118,19 @@ export const CheckAuth = async(route) => {
     } catch (e) {
         console.error(e);
         throw e;
+    }
+}
+
+//retrieve user info on page refresh
+export const getUser = async() => {
+    try {
+        const url = server + "/user/userInfo" 
+        const { data } = await axios.get(url)
+        console.log(data)
+        return data.payload
+    }
+    catch (error) {
+        console.log(error)
+        return null
     }
 }

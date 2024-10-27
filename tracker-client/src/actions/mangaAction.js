@@ -31,7 +31,14 @@ export const getUserTracking = async() => {
 
 export const addToTracking = async(manga) => {
   try {
-
+    const url = server + "/manga/addtracking";
+    const res = await axios.post(
+      url, {
+        manga: manga
+      }
+    )
+    console.log(res)
+    return true
   }
   catch (error) {
     if (error.response) {
@@ -43,11 +50,35 @@ export const addToTracking = async(manga) => {
     else {
 
     }
-
+    console.error(error)
+    return false
   }
 }
 
-export const removeFromTracking = async(mangaID) => {
+export const removeFromTracking = async(manga) => {
+  try {
+    console.log(manga.id)
+    const url = server + "/manga/removetracking";
+    const res = await axios.post(
+      url, {
+        bid: manga.id
+      }
+    )
+    console.log(res)
+    return true
+  }
+  catch (error) {
+    if (error.response) {
+      //if request is made and server response with error
+    }
+    else if (error.request) {
+      //if request is made but no response received
+    }
+    else {
 
+    }
+    console.error(error)
+    return false
+  }
 }
 

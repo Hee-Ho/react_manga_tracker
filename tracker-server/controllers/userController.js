@@ -1,8 +1,9 @@
-import { queryLogin, queryCreateAccount, queryUsername } from "../models/userModel.js";
+
+import { queryLogin, queryCreateAccount, queryLogout, queryUsername } from "../models/userModel.js";
+
 import bcrypt from "bcrypt";
 import { createHash } from "crypto";
 import { generateAccessToken } from "../jwt/accessToken.js";
-import { tokenAuthentication } from "../middlewares/dbMiddleware.js";
 
 const saltround = 10;
 
@@ -85,6 +86,41 @@ export const createAccount = async(req, res) => {
           }
         });
       }
+  }
+  catch (e) {
+    return res.status(500).send({
+      status: "Failed", 
+      message: `Internal server error: ${e.message}`
+    });
+  }
+}
+
+export const UserLogout = async(req, res) => {
+  try {
+    await queryLogout(req.body.uid, req.body.iat)
+    return res.status(200).send({
+      message: "Successfully logged out"
+    })
+  }
+  catch (e) {
+    return res.status(500).send({
+      status: "Failed", 
+      message: `Internal server error: ${e.message}`
+    });
+  }
+}
+
+export const getUser = async(req, res) => {
+  try {
+    const username = req.body.username || ""
+    const uid = req.body.uid || -1
+    return res.status(200).send( {
+      status: "Success",
+      payload: {
+        uid: uid,
+        username: username
+      }
+    });
   }
   catch (e) {
     return res.status(500).send({
