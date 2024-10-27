@@ -8,7 +8,7 @@ const mangaRouter = express.Router();
 mangaRouter.get("/", getAllManga);
 mangaRouter.get("/usertracking", tokenAuthentication, getUserTracking);
 mangaRouter.post("/addtracking", tokenAuthentication, addToTracking);
-mangaRouter.delete("/removetracking", tokenAuthentication, removeTracking);
+mangaRouter.post("/removetracking", tokenAuthentication, removeTracking);
 mangaRouter.post("/addmanga", addManga);
 
 //mangaDex API

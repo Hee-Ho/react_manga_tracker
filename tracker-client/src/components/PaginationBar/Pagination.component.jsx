@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const Pagination = ({total_result, current_page, searchParam = "", setSearchParams}) => {
   //props needs: total pages
   const [page, setPage] = useState(current_page);
-  let total_page = Math.ceil(total_result / 12);
+  let total_page = Math.ceil(total_result / 15);
   
   const settingPage = (e) => {
     setPage(e.target.value);
@@ -15,7 +15,7 @@ const Pagination = ({total_result, current_page, searchParam = "", setSearchPara
   //for synching page number on display with the searchParams
   useEffect( () => {
     setPage(current_page);
-  }, current_page);
+  }, [current_page]);
 
   //previous and next page click--------------------------------------------------
   const previousClick = e => {
