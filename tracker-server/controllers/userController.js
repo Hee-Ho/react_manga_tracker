@@ -1,4 +1,6 @@
-import { queryLogin, queryCreateAccount, queryLogout } from "../models/userModel.js";
+
+import { queryLogin, queryCreateAccount, queryLogout, queryUsername } from "../models/userModel.js";
+
 import bcrypt from "bcrypt";
 import { createHash } from "crypto";
 import { generateAccessToken } from "../jwt/accessToken.js";
@@ -151,4 +153,14 @@ const createValidation = (body) => {
     return false;
   }
   return reg_ex.test(email);
+}
+
+export const getUsername = async(req, res) => {
+  const uid = req.body.uid;
+  const user = await queryUsername(uid);
+  return res.status(200).send({
+    payload: {
+      username: user
+    }
+  })
 }

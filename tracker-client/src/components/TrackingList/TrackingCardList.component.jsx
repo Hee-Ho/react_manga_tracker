@@ -11,6 +11,7 @@ const TrackingCardList = () => {
   });
 
   if (isLoading) {
+    console.log(data)
     return (
       <p>Loading....</p>
     )

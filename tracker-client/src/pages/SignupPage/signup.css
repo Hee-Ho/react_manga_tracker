@@ -1,4 +1,4 @@
-.loginArea {
+.signupArea{
     padding-top: 50px;
     padding-bottom: 100px;
     height: 100%;
@@ -19,6 +19,18 @@
     padding-right: 5%;
     padding-bottom: 100px;
     border-radius: 10px;
+}
+
+.login {
+    border-color: transparent;
+    color: white;
+    background-color: #9c9b9b;
+    width: 25%;
+    font-size: 15px;
+    cursor: pointer;
+}
+.login:hover {
+    background-color: #535353;
 }
 
 .space{
@@ -55,17 +67,6 @@ button:active {
     border-width: 5px;
 }
 
-.signup {
-    border-color: transparent;
-    color: white;
-    background-color: #9c9b9b;
-    width: 25%;
-    font-size: 15px;
-    cursor: pointer;
-}
-.signup:hover {
-    background-color: #535353;
-}
 hr {
     text-align: center;
     width: 100%;
@@ -115,7 +116,3 @@ h1 {
     animation-duration: 500ms;
 }
 
-.failed {
-    color: red;
-    font-size: 18px;
-}
