@@ -1,17 +1,16 @@
 import TrackingCard from "./TrackingCard.component";
-import { getUserTracking } from "../../actions/mangaAction";
+import { getProfileTracking } from "../../actions/mangaAction";
 import { useQuery } from "@tanstack/react-query";
 import "./TrackingCardList.css"
 
-const TrackingCardList = () => {
+const TrackingCardList = ({uid}) => {
 
   const {data, isError, isLoading } = useQuery({
-    queryKey: ['userTracking'], 
-    queryFn: getUserTracking
+    queryKey: ['profileTracking', uid], 
+    queryFn: () => getProfileTracking(uid)
   });
 
   if (isLoading) {
-    console.log(data)
     return (
       <p>Loading....</p>
     )
@@ -22,14 +21,11 @@ const TrackingCardList = () => {
       <p>Error!</p>
     )
   }
-
   return (
     <div className="tracking-list"> 
       <h4>Tracking List </h4>
-      <TrackingCard> </TrackingCard>
-      <TrackingCard> </TrackingCard>
-      <TrackingCard> </TrackingCard>
-      <TrackingCard> </TrackingCard>
+      <TrackingCard manga_id={data[0].b_id} title={data[0].title_en}> </TrackingCard>
+      <TrackingCard manga_id={data[1].b_id} title={data[1].title_en}> </TrackingCard>
     </div>
   )
 }
