@@ -12,7 +12,7 @@ const ProfilePage = () => {
       <UserProfile className="sidebar" user_id={user_id}> </UserProfile>
       <main className="content"> 
         <h4> Content </h4>
-        <TrackingCardList> </TrackingCardList>
+        <TrackingCardList uid={user_id}> </TrackingCardList>
       </main>
     </div>
   )

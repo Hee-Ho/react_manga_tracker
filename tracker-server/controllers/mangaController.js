@@ -89,6 +89,24 @@ export const getUserTracking = async(req, res) => {
   }
 }
 
+// UserTracking would make it show the logged users
+// tracking, and not the profile being viewed tracking
+// Underlying query is the same however
+export const getProfileTracking = async(req, res) => {
+  try {
+    const data = await queryUserTracking(req.query.uid);
+    return res.status(200).json({
+      status: "success",
+      payload: data
+    })
+  }
+  catch (e) {
+    return res.status(500).json({
+      status: "failed",
+      message: e.message
+    })
+  }
+}
 //-------------------------------------------------------------------------------------------
 
 const checkMangaFields = (manga) => {
