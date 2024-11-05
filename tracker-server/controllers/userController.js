@@ -9,12 +9,14 @@ const saltround = 10;
 
 export const userLogin = async(req, res) => {
   try {
+    //validate request data
     if (!loginValidation(req.body)) {
       return res.status(400).send({
         status: "Failed",
         message: "Bad request"})
     }
     const data = await queryLogin(req.body.username);
+    
     //data from db is in the first element of array
     if (data.length < 1) {
       return res.status(404).send({
@@ -22,33 +24,28 @@ export const userLogin = async(req, res) => {
         message: "Account not found"
       });
     }
+
+    //compare password 
     const {user_id, password, username} = data[0];
-    bcrypt.compare(req.body.password, password, (err, result) => {
-      if (err) {
-        return res.status(500).send({
-          status: "Failed",
-          message: "Internal server error"
-        });
+    const isValid = await bcrypt.compare(req.body.password, password)
+    if (!isValid) {
+      return res.status(401).send( {
+        status: "Failed",
+        message: "Incorrect password"
+      })
+    }
+    
+    //generate access token
+    const accessToken = generateAccessToken({user_id, username}); 
+    res.cookie("accessToken", accessToken, {httpOnly: true});
+    return res.status(200).send( {
+      status: "Success",
+      message: "Logged in successfully",
+      payload: {
+        uid: user_id,
+        username: username
       }
-      if (!result) {
-        return res.status(401).send({
-          status: "Failed",
-          message: "Incorrect password"
-        });
-      }
-      else {
-        const accessToken = generateAccessToken({user_id, username}); //generate access token
-        res.cookie("accessToken", accessToken, {httpOnly: true});
-        return res.status(200).send( {
-          status: "Success",
-          message: "Logged in successfully",
-          payload: {
-            uid: user_id,
-            username: username
-          }
-        });
-      }
-    })
+    });
   }
   catch (e) {
     res.status(500).send({

@@ -39,3 +39,19 @@
 .nav-bar li:hover {
   background-color: lightgrey;
 }
+
+.logout-button {
+  background-color: gray;
+  border: none;
+  font-size: medium;
+  margin-left: auto;
+}
+
+.logout-button:hover {
+  background-color: lightgray;
+}
+
+.logout-button:active {
+  background-color: rgb(71, 70, 70);
+  border: none;
+}
