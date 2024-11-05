@@ -10,3 +10,13 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.no-server {
+  text-align: center;
+  margin: auto;
+}
+
+.loading-page {
+  text-align: center;
+  margin: auto;
+}

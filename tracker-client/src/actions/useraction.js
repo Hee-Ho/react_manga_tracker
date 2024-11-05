@@ -76,9 +76,16 @@ export const LoginUser = async(userData) => {
     }
 }
 
-export const LogOut = () => {
-    localStorage.clear()
-    
+export const LogoutUser = async() => {
+    try {
+        const url = server + "/user/logout";
+        const response = await axios.post(url);
+        console.log(response)
+        return
+    } catch (e) {
+        console.error(e);
+        throw e;
+    }
 }
 
 // Used to check if a users JWT token is valid for a route
@@ -104,11 +111,9 @@ export const getUser = async() => {
     try {
         const url = server + "/user/userInfo" 
         const { data } = await axios.get(url)
-        console.log(data)
         return data.payload
     }
     catch (error) {
-        console.log(error)
         return null
     }
 }
