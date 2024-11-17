@@ -48,7 +48,6 @@ function App() {
         }
       }
     };
-
     fetchData();
   }, [serverDown, error])
 

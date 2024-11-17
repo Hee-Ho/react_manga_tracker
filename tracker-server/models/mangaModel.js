@@ -57,11 +57,12 @@ export const queryCheckIfTracked = async(manga_id, user_id) => {
   }
 }
 
+
 //Will set offset for pagination
-export const queryUserTracking = async(user_id) => {
+export const queryUserTracking = async(user_id, offset = 0) => {
   try {
-    const query = "SELECT manga.b_id, manga.title_en, s.status_name, manga.updatedAt FROM manga RIGHT JOIN (SELECT user_id, b_id FROM tracking_list WHERE user_id = ?) AS userTrack ON manga.b_id = userTrack.b_id LEFT JOIN manga_status as s on s.status_code = manga.b_status LIMIT 10 OFFSET 0;"
-    const data = await dbConnection.query(query, [user_id]);
+    const query = "SELECT manga.b_id, manga.title_en, s.status_name, manga.updatedAt, manga.image_path FROM manga RIGHT JOIN (SELECT user_id, b_id FROM tracking_list WHERE user_id = ?) AS userTrack ON manga.b_id = userTrack.b_id LEFT JOIN manga_status as s on s.status_code = manga.b_status LIMIT 10 OFFSET ?;"
+    const data = await dbConnection.query(query, [user_id, offset]);
     return data[0];
   } 
   catch (e) {

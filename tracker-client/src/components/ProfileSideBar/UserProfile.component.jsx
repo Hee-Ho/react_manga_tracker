@@ -1,24 +1,13 @@
 import "./UserProfile.css";
-import { GetUsername } from "../../actions/useraction";
-import { useState } from "react";
+import profile_pic from "../../images/blank-profile-picture.png"
 
 const UserProfile = ({user_id}) => {
-
-  const [username, setUsername] = useState("")
-
-  const Username = async() => {
-    setUsername(await GetUsername(user_id))
-  }
-
-  Username();
-
   return (
     <div className="profile-sidebar"> 
-      <img className="profile-pic" src={`https://robohash.org/${user_id}`} alt="profile_card"/>
-      <label className="username">{username}</label>
+      <img className="profile-pic" width={"300rem"} src={profile_pic} alt="profile_card"/>
+      <span>Profile details </span>
     </div>
   )
 }
-
 
 export default UserProfile;

@@ -1,6 +1,9 @@
 # manga_tracker web app
 A web app for user to keep track of their favourite manga/manhwa/web novels.
 
+# Note
+CSS styling not finalized
+
 ### Credit
 Information of manga/manhwa/web comic are acquired from the MangaDex API.
 MangaDex API Endpoint

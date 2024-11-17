@@ -95,6 +95,7 @@ export const createAccount = async(req, res) => {
 export const UserLogout = async(req, res) => {
   try {
     await queryLogout(req.body.uid, req.body.iat)
+    res.clearCookie("accessToken");
     return res.status(200).send({
       message: "Successfully logged out"
     })

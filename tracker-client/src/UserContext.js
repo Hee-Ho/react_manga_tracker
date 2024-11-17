@@ -1,17 +1,18 @@
 //For saving user information when logged in
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 //attempt to retrieve info here
 const UserContext = createContext();
 
 export const UserProvider = ({children}) => {
   const [Username, setUsername] = useState("");
-  const [UserID, setUserID] = useState("");
+  const [UserID, setUserID] = useState(-1);
 
-  const login = (username, uid) => {
-    setUsername(username)
-    setUserID(uid)
-  }
+  //useCallback memoize the login function so that it can act as an dependencies in the useEffect
+  const login = useCallback((username, uid) => {
+    setUsername(username);
+    setUserID(uid);
+  }, [])
 
   const logout = () => {
     setUsername("")

@@ -1,18 +1,18 @@
-import UserProfile from "../../components/ProfileSideBar/UserProfile.component"
-
 import {  useParams } from "react-router-dom";
 import "./profilePage.css";
 import TrackingCardList from "../../components/TrackingList/TrackingCardList.component";
+import profile_pic from "../../images/blank-profile-picture.png"
 
 const ProfilePage = () => {
   const user_id = useParams().uid;
-  
   return (
     <div className="profile-page">
-      <UserProfile className="sidebar" user_id={user_id}> </UserProfile>
+    <div className="profile-sidebar"> 
+    <img className="profile-pic" src={profile_pic} alt="profile_card"/>
+    <span>Profile details </span>
+  </div>
       <main className="content"> 
-        <h4> Content </h4>
-        <TrackingCardList uid={user_id}> </TrackingCardList>
+        <TrackingCardList> </TrackingCardList>
       </main>
     </div>
   )

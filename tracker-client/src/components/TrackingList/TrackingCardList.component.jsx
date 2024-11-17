@@ -1,10 +1,11 @@
 import TrackingCard from "./TrackingCard.component";
 import { getProfileTracking } from "../../actions/mangaAction";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import "./TrackingCardList.css"
 
-const TrackingCardList = ({uid}) => {
-
+const TrackingCardList = () => {
+  const navigate = useNavigate();
   const {data, isError, isLoading } = useQuery({
     queryKey: ['profileTracking', uid], 
     queryFn: () => getProfileTracking(uid)
@@ -17,15 +18,16 @@ const TrackingCardList = ({uid}) => {
   }
 
   if (isError) {
-    return (
-      <p>Error!</p>
-    )
+    alert("Session Expired!");
+    navigate("/");
   }
+  
   return (
     <div className="tracking-list"> 
-      <h4>Tracking List </h4>
-      <TrackingCard manga_id={data[0].b_id} title={data[0].title_en}> </TrackingCard>
-      <TrackingCard manga_id={data[1].b_id} title={data[1].title_en}> </TrackingCard>
+      <h3>Tracking List </h3>
+      {data.map((manga) => (
+        <TrackingCard key={manga.b_id} manga={manga}> </TrackingCard>
+      ))}
     </div>
   )
 }
