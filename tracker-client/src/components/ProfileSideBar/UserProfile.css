@@ -1,0 +1,14 @@
+.profile-sidebar {
+  min-width: 15%;
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-pic {
+  margin-top: 1%;
+  background-color: aqua;
+  border-style: solid;
+  width: 80%
+}
