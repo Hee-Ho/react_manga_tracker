@@ -17,7 +17,7 @@ const TrackingCard = ({manga}) => {
         <h3> {title_en} </h3>
         <h5> Status: {status_name} </h5>
         <h5> Last Updated: {convertDate(updatedAt)} </h5>
-      </div> 
+      </div>
     </div>
   )
 }

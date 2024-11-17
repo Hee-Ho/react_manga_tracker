@@ -10,5 +10,4 @@ const UserProfile = ({user_id}) => {
   )
 }
 
-
 export default UserProfile;
