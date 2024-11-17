@@ -18,7 +18,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Server error")
 })
 
-app.get("/", confirmDBconnection, (req, res, next) => {
+app.get("/", (req, res, next) => {
   res.status(200).json({ message: "server is running" });
 });
 

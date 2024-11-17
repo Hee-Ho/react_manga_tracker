@@ -60,7 +60,7 @@ export const LoginUser = async(userData) => {
             }
         )
         .then(res => {
-            return(res.status == 200 ? res.data.payload : false);
+            return(res.status === 200 ? res.data.payload : false);
         })
         .catch(function (err) {
             // Make a check for error 401 => Incorrect password / user
@@ -114,6 +114,9 @@ export const getUser = async() => {
         return data.payload
     }
     catch (error) {
-        return null
+        return {
+            username: "",
+            uid: -1
+        }
     }
 }

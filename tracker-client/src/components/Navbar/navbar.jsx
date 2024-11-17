@@ -2,10 +2,9 @@
 import "./navbar.css";
 import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
-import { ProfilePage } from "../../pages/ProfilePage/profilePage"
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { getUser } from "../../actions/useraction";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { LogoutUser } from "../../actions/useraction";
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -15,33 +14,30 @@ const NavigationBar = () => {
   const {data, isSuccess} = useQuery({
     queryKey: ["user"],
     queryFn: () => getUser(),
-    enabled: UserID > 0,
-    refetchOnWindowFocus: true,
-    refetchOnMount: true
+    refetchOnMount: true,
     }
   )
 
   //update context on success
   useEffect( () => {
-    if (UserID > 0) {
-      if (isSuccess && data) {
-        login(data.username, data.uid);
-        queryClient.setQueryData(['user', data])
-      }
+      if (isSuccess) {
+        login(data.username, data.uid)
     }
-  }, [isSuccess, data, login, queryClient, UserID])
+  }, [isSuccess, data, login])
   
   //logging out 
   const logout_click = async(e) => {
     try {
       await LogoutUser()
       logout()
+      queryClient.setQueryData(["user"], { uid: -1, username: ""})
       alert("Logout successful")
       navigate("/")
     }
     catch (error) {
       alert(error)
       logout()
+      queryClient.setQueryData(["user"], { uid: -1, username: ""})
       navigate("/")
     }
   }
@@ -53,7 +49,7 @@ const NavigationBar = () => {
         <ul>
           <CustomLink to="/" text="Home"> </CustomLink>
           <CustomLink to="/testManga?title=&page=1" text="Manga"> </CustomLink>
-          {Username!=="" 
+          {Username !== ""
           ?
               <CustomLink to={profileLink} text={Username}> </CustomLink>
           : 
@@ -61,7 +57,7 @@ const NavigationBar = () => {
           }
         </ul>
 
-        {Username!=="" && (
+        {Username !== "" && (
           <button className="logout-button" onClick={logout_click}> Logout </button>
         )}
       </nav>

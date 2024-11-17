@@ -6,7 +6,7 @@
   border-radius: 10px;
   width: 90%;
   justify-content: space-between;
-  height: 100px;
+  height: 150px;
 }
 
 img {
@@ -14,8 +14,8 @@ img {
 }
 
 .title-status {
-  padding-left: 2px;
-  justify-content: space-between;
+  padding: 0% 1% 0% 1%;
+  line-height: 100%;
   width: 100%;
 }
 
@@ -23,3 +23,4 @@ img {
   background-color: rgb(212, 206, 206);
   cursor: pointer;
 }
+

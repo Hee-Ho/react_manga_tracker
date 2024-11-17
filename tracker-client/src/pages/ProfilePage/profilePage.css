@@ -8,9 +8,33 @@
   flex-grow: 1;
 }
 
-@media only screen and (max-width: 600px){
+.profile-sidebar {
+  min-width: 15%;
+  max-width: 25%;
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-pic {
+  margin-top: 5%;
+  background-color: aqua;
+  border-style: solid;
+  width: 50%
+}
+
+@media only screen and (max-width: 1000px){
   .profile-page {
     flex-direction: column;
+  }
+
+  .profile-sidebar {
+    min-width: 100%;
+  }
+
+  .profile-pic {
+    width: 30%;
   }
   
 }

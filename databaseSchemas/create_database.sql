@@ -12,6 +12,7 @@ CREATE TABLE User_accounts (
 );
 ALTER TABLE user_accounts ADD username VARCHAR(255);
 CREATE INDEX username_index on user_accounts (username); -- make username a non-clustered index 
+AlTER TABLE user_accounts auto_increment = 3000; -- change id number to start from 3000
 
 
 -- Manga Table----------------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +49,14 @@ CREATE TABLE Tracking_list (
 Create Table Invalid_tokens (
 	user_id INT, 
     iat INT
-)
+);
+
+
+-- Friend Table --------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE Friends_table (
+	user_id INT,
+    friend_id INT
+);
 
 -- FUTURE DB TABLE, DO NOT RUN------------------------------------------------------------------------------------------------------------------
 /*
