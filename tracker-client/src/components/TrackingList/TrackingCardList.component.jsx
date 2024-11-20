@@ -2,13 +2,15 @@ import TrackingCard from "./TrackingCard.component";
 import { getProfileTracking } from "../../actions/mangaAction";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../UserContext";
 import "./TrackingCardList.css"
 
 const TrackingCardList = () => {
+  const { UserID } = useUser()
   const navigate = useNavigate();
   const {data, isError, isLoading } = useQuery({
-    queryKey: ['profileTracking', uid], 
-    queryFn: () => getProfileTracking(uid)
+    queryKey: ['profileTracking', UserID], 
+    queryFn: () => getProfileTracking(UserID)
   });
 
   if (isLoading) {
