@@ -4,7 +4,6 @@ import TrackingCardList from "../../components/TrackingList/TrackingCardList.com
 import profile_pic from "../../images/blank-profile-picture.png"
 
 const ProfilePage = () => {
-  const user_id = useParams().uid;
   return (
     <div className="profile-page">
     <div className="profile-sidebar"> 

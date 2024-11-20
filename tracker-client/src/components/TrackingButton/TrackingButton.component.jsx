@@ -7,29 +7,38 @@ import { useQuery, QueryClient } from "@tanstack/react-query";
 import { getUserTracking } from "../../actions/mangaAction";
 import { useUser } from "../../UserContext";
 import { addToTracking, removeFromTracking } from "../../actions/mangaAction";
+import { useEffect, useState } from "react";
 
 
 const TrackingButton = ({manga}) => {
+  const [tracking, setTracking] = useState(false);
   const { UserID } = useUser()
   const navigate = useNavigate()
   const queryClient = new QueryClient()
   if (UserID < 0) { //clear cache
     queryClient.removeQueries(["userTracking"])
   }
-  let { data, isLoading, isError } = useQuery({
+  let mangaSet = new Set();
+  let { data, isLoading, isError, isSuccess } = useQuery({
     queryKey: ["userTracking"],
     queryFn: () => getUserTracking(),
     enabled: UserID > 0, //execute only when UID exist
   });
 
-
+  useEffect(() => {
+    if (isSuccess && data) {
+      const mangaSet = new Set(data.map((d) => d.b_id));
+      setTracking(mangaSet.has(manga.id));
+    }
+  }, [data, isSuccess, manga.id]);
+  
 //Need to add function to update cache or make backend return the new user tracking list
   const addToTrackingClick = () => {
     if (UserID > 0) {
       const status = addToTracking(manga)
       if (status) {
-        console.log(data)
-        data.append(manga)
+        mangaSet.add(manga.id)
+        setTracking(true)
       }
     }
     else {
@@ -42,7 +51,8 @@ const TrackingButton = ({manga}) => {
     if (UserID > 0) {
       const status = removeFromTracking(manga)
       if (status) {
-        console.log(data)
+        mangaSet.delete(manga.id)
+        setTracking(false)
       }
     }
   }
@@ -56,7 +66,7 @@ const TrackingButton = ({manga}) => {
     )
   }
 
-  if (data && data.find(m => m.b_id === manga.id)) {
+  if (tracking) {
     return (
       <div className="button-container" onClick={removeFromTrackingClick}>
         Tracking 
