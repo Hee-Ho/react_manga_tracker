@@ -4,9 +4,8 @@ import { FaRegStar } from "react-icons/fa6";
 import { MdBlock } from "react-icons/md";
 import { FaThumbsUp } from "react-icons/fa"; //temp usage
 import { useQuery, QueryClient } from "@tanstack/react-query";
-import { getUserTracking } from "../../actions/mangaAction";
 import { useUser } from "../../UserContext";
-import { addToTracking, removeFromTracking } from "../../actions/mangaAction";
+import { addToTracking, removeFromTracking, getTrackingStatus } from "../../actions/mangaAction";
 import { useEffect, useState } from "react";
 
 
@@ -16,44 +15,51 @@ const TrackingButton = ({manga}) => {
   const navigate = useNavigate()
   const queryClient = new QueryClient()
   if (UserID < 0) { //clear cache
-    queryClient.removeQueries(["userTracking"])
+    queryClient.removeQueries(["trackingStatus"])
   }
-  let mangaSet = new Set();
   let { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["userTracking"],
-    queryFn: () => getUserTracking(),
+    queryKey: ["trackingStatus"],
+    queryFn: () => getTrackingStatus(manga.id),
     enabled: UserID > 0, //execute only when UID exist
   });
 
   useEffect(() => {
     if (isSuccess && data) {
-      const mangaSet = new Set(data.map((d) => d.b_id));
-      setTracking(mangaSet.has(manga.id));
+      console.log(data)
+      setTracking(data);
     }
   }, [data, isSuccess, manga.id]);
   
 //Need to add function to update cache or make backend return the new user tracking list
   const addToTrackingClick = () => {
-    if (UserID > 0) {
-      const status = addToTracking(manga)
-      if (status) {
-        mangaSet.add(manga.id)
-        setTracking(true)
+    try {
+      if (UserID > 0) {
+        const status = addToTracking(manga)
+        if (status) {
+          setTracking(true)
+        }
+      }
+      else {
+        alert("Log in to add manga to tracking list")
+        navigate("/login")
       }
     }
-    else {
-      alert("Log in to add manga to tracking list")
-      navigate("/login")
+    catch {
+      alert("An error has occurred")
     }
   }
 
   const removeFromTrackingClick = () => {
-    if (UserID > 0) {
-      const status = removeFromTracking(manga)
-      if (status) {
-        mangaSet.delete(manga.id)
-        setTracking(false)
+    try {
+      if (UserID > 0) {
+        const status = removeFromTracking(manga)
+        if (status) {
+          setTracking(false)
+        }
       }
+    } 
+    catch {
+      alert("An error has occurred")
     }
   }
 

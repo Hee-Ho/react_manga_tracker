@@ -35,10 +35,17 @@ const MangaInfoPage = () => {
       <img className="cover-cell" src={image_url} alt="Manga cover" loading="lazy"/>
       <h1 className="title-box">  {data.title_en} </h1>
       <TrackingButton manga={data}> </TrackingButton>
-      <h3 className="status-box"> status: {data.status} </h3>
+      <h3 className="status-box"> Status: {data.status} </h3>
+      <h3 className="update-date"> Last Updated: {convertDate(data.updatedAt)} </h3>
       <p className="summary-box"> {data.summary} </p>
     </div>
   )
+}
+
+const convertDate = (date) => {
+  const isoString = new Date(date).toISOString();
+  const formatted = isoString.split("T")[0];
+  return formatted;
 }
 
 export default MangaInfoPage;

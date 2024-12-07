@@ -4,10 +4,12 @@ import cors from "cors";
 import userRouter from "./routes/userRoute.js";
 import mangaRouter from "./routes/mangaRoute.js";
 import dbConnection from "./database/database.js";
+import dotenv from "dotenv";
 import { confirmDBconnection, tokenAuthentication } from "./middlewares/dbMiddleware.js";
 
+dotenv.config()
 const app = express()
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 app.use(cors({origin: true, credentials:true}));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,4 +36,7 @@ dbConnection.query("Select 1")
     app.listen(port, 
       () => console.log(`Server is listening on port ${port}!`)
   )})
-  .catch (err => console.log("Failed to connect to database"))
+  .catch (err => {
+    console.log("Failed to connect to database, exiting")
+    console.log(err)
+  })

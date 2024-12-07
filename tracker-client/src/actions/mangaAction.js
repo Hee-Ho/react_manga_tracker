@@ -74,15 +74,6 @@ export const addToTracking = async(manga) => {
     return true
   }
   catch (error) {
-    if (error.response) {
-      //if request is made and server response with error
-    }
-    else if (error.request) {
-      //if request is made but no response received
-    }
-    else {
-
-    }
     console.error(error)
     return false
   }
@@ -101,15 +92,18 @@ export const removeFromTracking = async(manga) => {
     return true
   }
   catch (error) {
-    if (error.response) {
-      //if request is made and server response with error
-    }
-    else if (error.request) {
-      //if request is made but no response received
-    }
-    else {
+    console.error(error)
+    return false
+  }
+}
 
-    }
+export const getTrackingStatus = async(manga_id) => {
+  try {
+    const url = server + "/manga/usertracking/check/" + manga_id
+    const { data } = await axios.get(url)
+    return data.payload
+  }
+  catch (error) {
     console.error(error)
     return false
   }
