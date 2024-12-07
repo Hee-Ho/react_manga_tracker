@@ -50,13 +50,12 @@ export const queryCheckIfTracked = async(manga_id, user_id) => {
   try {
     const query = "SELECT b_id FROM tracking_list WHERE b_id = ? AND user_id = ?;";
     const result = await dbConnection.query(query, [manga_id, user_id]);
-    return result;
+    return result[0].length > 0;
   }
   catch (e) {
     throw Error ("Unable to retrieve record");
   }
 }
-
 
 //Will set offset for pagination
 export const queryUserTracking = async(user_id, offset = 0) => {
@@ -68,5 +67,4 @@ export const queryUserTracking = async(user_id, offset = 0) => {
   catch (e) {
     throw Error("Unable to retrieve user's tracking list")
   }
- 
 }

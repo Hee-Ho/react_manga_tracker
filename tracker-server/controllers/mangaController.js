@@ -1,4 +1,4 @@
-import { queryAllManga, queryAddToTracking, queryAddToDB, queryRemoveTracking, queryUserTracking } from "../models/mangaModel.js";
+import { queryAllManga, queryAddToTracking, queryAddToDB, queryRemoveTracking, queryUserTracking, queryCheckIfTracked } from "../models/mangaModel.js";
 
 const code400 = { 
       status: "failed",
@@ -101,6 +101,25 @@ export const getProfileTracking = async(req, res) => {
     })
   }
   catch (e) {
+    return res.status(500).json({
+      status: "failed",
+      message: e.message
+    })
+  }
+}
+
+//check if a manga is in the user's tracking list
+export const checkIfTracked = async(req, res) => {
+  try {
+    const { manga_id } = req.params
+    const data = await queryCheckIfTracked(manga_id, req.body.uid)
+    return res.status(200).json({
+      status: "success",
+      payload: data
+    })
+    
+  }
+  catch {
     return res.status(500).json({
       status: "failed",
       message: e.message

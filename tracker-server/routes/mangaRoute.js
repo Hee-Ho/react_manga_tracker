@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllManga, addManga, addToTracking, removeTracking, getUserTracking, getProfileTracking } from "../controllers/mangaController.js";
+import { getAllManga, addManga, addToTracking, removeTracking, getUserTracking, getProfileTracking, checkIfTracked } from "../controllers/mangaController.js";
 import { getMangaAPI, APIgetByID } from "../controllers/mangadexController.js";
 import { tokenAuthentication } from "../middlewares/dbMiddleware.js";
 
@@ -8,6 +8,7 @@ const mangaRouter = express.Router();
 mangaRouter.get("/", getAllManga);
 mangaRouter.get("/profiletracking", getProfileTracking);
 mangaRouter.get("/usertracking", tokenAuthentication, getUserTracking);
+mangaRouter.get("/usertracking/check/:manga_id", tokenAuthentication, checkIfTracked)
 mangaRouter.post("/addtracking", tokenAuthentication, addToTracking);
 mangaRouter.post("/removetracking", tokenAuthentication, removeTracking);
 mangaRouter.post("/addmanga", addManga);
